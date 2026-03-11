@@ -1,0 +1,227 @@
+/**=====================
+     Video Modal SCSS
+==========================**/
+
+.video-thumbnail-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+
+    .video-play-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(180deg,
+                rgba(0, 0, 0, 0.1) 0%,
+                rgba(0, 0, 0, 0.3) 100%);
+        transition: all 0.3s ease-in-out;
+        z-index: 1;
+
+        .play-button-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transform: scale(1);
+            transition: transform 0.3s ease-in-out;
+
+            .play-icon {
+                font-size: calc(90px + (80 - 60) * ((100vw - 320px) / (1920 - 320)));
+                color: #ff6b6b;
+                filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+            .play-text {
+                font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+                font-weight: 600;
+                color: #ffffff;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+                opacity: 0;
+                transform: translateY(10px);
+                transition: all 0.3s ease-in-out;
+            }
+        }
+    }
+
+    &:hover {
+        .video-play-overlay {
+            background: linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.5) 0%,
+                    rgba(0, 0, 0, 0.7) 100%);
+
+            .play-button-wrapper {
+                transform: scale(1.1);
+
+                .play-text {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+// Video Modal Styles
+.video-modal-wrapper {
+    .modal-content {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    .video-modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: -1;
+        backdrop-filter: blur(8px);
+    }
+
+    .video-modal-body {
+        padding: 0;
+        position: relative;
+        background: transparent;
+
+        .video-close-button {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease-in-out;
+            backdrop-filter: blur(10px);
+
+            @include max(767.98px) {
+                top: -40px;
+                width: 36px;
+                height: 36px;
+            }
+
+            svg {
+                font-size: 24px;
+                color: #ffffff;
+                transition: transform 0.3s ease-in-out;
+
+                @include max(767.98px) {
+                    font-size: 20px;
+                }
+            }
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: rotate(90deg);
+
+                svg {
+                    transform: scale(1.1);
+                }
+            }
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; // 16:9 aspect ratio
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+            @include max(767.98px) {
+                border-radius: 8px;
+            }
+
+            .video-player {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                background: #000;
+            }
+        }
+    }
+}
+
+// Modal animation
+.video-modal-wrapper {
+    .modal-dialog {
+        animation: modalFadeIn 0.3s ease-out;
+    }
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+// Responsive adjustments
+@include max(991.98px) {
+    .video-modal-wrapper {
+        .modal-dialog {
+            margin: 1rem;
+        }
+    }
+}
+
+@include max(575.98px) {
+    .video-thumbnail-wrapper {
+        .video-play-overlay {
+            .play-button-wrapper {
+                .play-icon {
+                    font-size: 50px;
+                }
+
+                .play-text {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
