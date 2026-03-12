@@ -27,3 +27,13 @@ jobs:
         run: npm run build
         env:
           NODE_ENV: production
+
+      - name: Copy files to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: ".next,public,package.json,package-lock.json,next.config.js"
+          target: "~/opt/app"
+
