@@ -31,6 +31,20 @@ jobs:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_STORAGE_URL: ${{ secrets.NEXT_PUBLIC_STORAGE_URL }}
 
+      - name: Clean old remote files
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: " "
+          script: |
+            mkdir -p ~/opt/app/zarrouk-frontend
+            rm -rf ~/opt/app/zarrouk-frontend/.next
+            rm -f ~/opt/app/zarrouk-frontend/package.json
+            rm -f ~/opt/app/zarrouk-frontend/package-lock.json
+            rm -f ~/opt/app/zarrouk-frontend/next.config.js
+
       - name: Copy files to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
