@@ -43,4 +43,14 @@ jobs:
           source: ".next,public,package.json,package-lock.json,next.config.js"
           target: "~/opt/app/zarrouk-frontend"
 
-
+      - name: Restart Docker containers
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: " "
+          script: |
+            cd ~/opt/app/zarrouk-frontend
+            sudo docker compose down
+            sudo docker compose build --no-cache && sudo docker compose up -d
