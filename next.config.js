@@ -10,11 +10,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "laravel.pixelstrap.net",
+        hostname: "www.zarrouk.tn",
       },
       {
-        protocol: "http",
-        hostname: "laravel.pixelstrap.net",
+        protocol: "https",
+        hostname: "zarrouk.tn",
       },
       {
         protocol: "http",
