@@ -31,14 +31,13 @@ const LoginContent = () => {
         </Col>
 
         <Col xxl={4} xl={5} lg={6} sm={8} className='mx-auto'>
-            <ShowBox showBoxMessage={showBoxMessage} />
+          <ShowBox showBoxMessage={showBoxMessage} />
           <div className='log-in-box'>
             <AuthHeadings heading1={`Welcome to ${settingData?.general?.site_name}`} heading2={'LogInYourAccount'} />
             <div className='input-box mb-2'>
-              <LoginForm  mutate={mutate} isLoading={isLoading}/>
+              <LoginForm mutate={mutate} isLoading={isLoading} />
             </div>
             <Link href={`/auth/phn-login`}>
-            <FormBtn title={'LogInWithPhn'} classes={{ btnClass: ' number-btn btn w-100' }} />
             </Link>
             <div className='other-log-in'>
               <h6>{t('or')}</h6>

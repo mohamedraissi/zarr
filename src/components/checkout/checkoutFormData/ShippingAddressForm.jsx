@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Row } from 'reactstrap';
 
 const ShippingAddressForm = ({ values, data, }) => {
-    const { t } = useTranslation( 'common');
+    const { t } = useTranslation('common');
     return (
         <div className="checkbox-main-box">
             <div className="checkout-title1">
@@ -30,14 +30,15 @@ const ShippingAddressForm = ({ values, data, }) => {
                                 name: 'shipping_address.country_id',
                                 id: 'shipping_address.country_id',
                                 options: data,
-                                defaultOption: 'Select state',
+                                defaultOption: 'tunisia',
+
                             },
                         },
-                     
+
                         {
                             name: 'shipping_address.state_id',
                             require: 'true',
-                            title: 'State',
+                            title: 'state',
                             toplabel: 'State',
                             colprops: { xxl: 6, lg: 12, sm: 6 },
                             inputprops: {

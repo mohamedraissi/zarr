@@ -5,54 +5,54 @@ import { useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { Col, Input, Label, Row } from 'reactstrap';
 
-const BillingAddressForm = ({ values,setFieldValue, errors, data }) => {
+const BillingAddressForm = ({ values, setFieldValue, errors, data }) => {
     const { t } = useTranslation('common');
     useEffect(() => {
         if (values.billing_address.same_shipping) {
-          setFieldValue('billing_address', {
-            ...values.billing_address,
-            title: values.shipping_address.title,
-            street: values.shipping_address.street,
-            country_id: values.shipping_address.country_id,
-            state_id: values.shipping_address.state_id,
-            city: values.shipping_address.city,
-            pincode: values.shipping_address.pincode,
-            country_code: values.shipping_address.country_code,
-            phone: values.shipping_address.phone,
-          });
+            setFieldValue('billing_address', {
+                ...values.billing_address,
+                title: values.shipping_address.title,
+                street: values.shipping_address.street,
+                country_id: values.shipping_address.country_id,
+                state_id: values.shipping_address.state_id,
+                city: values.shipping_address.city,
+                pincode: values.shipping_address.pincode,
+                country_code: values.shipping_address.country_code,
+                phone: values.shipping_address.phone,
+            });
         } else {
-          setFieldValue('billing_address', {
-            ...values.billing_address,
-            same_shipping: false,
-            title: '',
-            street: '',
-            country_id: '',
-            state_id: '',
-            city: '',
-            pincode: '',
-            country_code: '',
-            phone: '',
-          });
+            setFieldValue('billing_address', {
+                ...values.billing_address,
+                same_shipping: false,
+                title: '',
+                street: '',
+                country_id: '',
+                state_id: '',
+                city: '',
+                pincode: '',
+                country_code: '',
+                phone: '',
+            });
         }
-      }, [values.billing_address.same_shipping, setFieldValue]); // Only `initialValues.billing_address.same_shipping`
-    
+    }, [values.billing_address.same_shipping, setFieldValue]); // Only `initialValues.billing_address.same_shipping`
+
     return (
         <div className="checkbox-main-box">
             <div className="checkout-title1">
                 <h2>{`Billing Details`}</h2>
             </div>
             <Row>
-               
-               {!errors.shipping_address &&
-                <Col md={12}>
-                    <div className='mb-3 form-box form-checkbox'> 
-                        <Input className='checkbox_animated check-box' type='checkbox' name='billing_address.same_shipping' onChange={(e) => {setFieldValue('billing_address.same_shipping', e.target.checked);  }} checked={values.billing_address.same_shipping}/>
-                        <Label className='form-check-label' htmlFor='flexCheckDefault'>
-                            {t('same_as_shipping')}
-                        </Label>
-                    </div>
-                </Col>
-              }
+
+                {!errors.shipping_address &&
+                    <Col md={12}>
+                        <div className='mb-3 form-box form-checkbox'>
+                            <Input className='checkbox_animated check-box' type='checkbox' name='billing_address.same_shipping' onChange={(e) => { setFieldValue('billing_address.same_shipping', e.target.checked); }} checked={values.billing_address.same_shipping} />
+                            <Label className='form-check-label' htmlFor='flexCheckDefault'>
+                                {t('same_as_shipping')}
+                            </Label>
+                        </div>
+                    </Col>
+                }
 
                 <SimpleInputField
                     nameList={[
@@ -78,7 +78,7 @@ const BillingAddressForm = ({ values,setFieldValue, errors, data }) => {
                         {
                             name: 'billing_address.state_id',
                             require: 'true',
-                            title: 'State',
+                            title: 'state',
                             toplabel: 'State',
                             colprops: { xxl: 6, lg: 12, sm: 6 },
                             inputprops: {

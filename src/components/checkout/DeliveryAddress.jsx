@@ -8,8 +8,8 @@ import AddAddressForm from './common/AddAddressForm';
 import ShowAddress from './ShowAddress';
 
 const DeliveryAddress = ({ type, title, address, modal, mutate, isLoading, setModal, setFieldValue }) => {
-  const { t } = useTranslation( 'common');
-
+  const { t } = useTranslation('common');
+  console.log("address : ", title)
   useEffect(() => {
     address?.length > 0 && setFieldValue(`${type}_address_id`, address[0].id);
   }, [address]);
@@ -18,7 +18,7 @@ const DeliveryAddress = ({ type, title, address, modal, mutate, isLoading, setMo
       <CheckoutCard icon={<RiMapPinLine />}>
         <div className='checkout-title'>
           <h4>
-            {t(title)} {t('address')}
+            {t(title)}
           </h4>
           <a className='d-flex align-items-center fw-bold' onClick={() => setModal(type)}>
             <RiAddLine className='me-1'></RiAddLine>

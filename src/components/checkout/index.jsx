@@ -128,9 +128,9 @@ const CheckoutContent = () => {
                       {access_token &&
                         <div className='checkout-detail-box'>
                           <ul>
-                            {!addToCartData?.is_digital_only && <DeliveryAddress key='shipping' type='shipping' title={'Shipping'} values={values} updateId={values['consumer_id']} setFieldValue={setFieldValue} address={address} modal={modal} mutate={mutate} isLoading={isLoading} setModal={setModal}
+                            {!addToCartData?.is_digital_only && <DeliveryAddress key='shipping' type='shipping' title={'shipping_address'} values={values} updateId={values['consumer_id']} setFieldValue={setFieldValue} address={address} modal={modal} mutate={mutate} isLoading={isLoading} setModal={setModal}
                             />}
-                            <DeliveryAddress key='billing' type='billing' title={'Billing'} values={values} updateId={values['consumer_id']} setFieldValue={setFieldValue} address={address} modal={modal} mutate={mutate} isLoading={isLoading} setModal={setModal}
+                            <DeliveryAddress key='billing' type='billing' title={'billing_address'} values={values} updateId={values['consumer_id']} setFieldValue={setFieldValue} address={address} modal={modal} mutate={mutate} isLoading={isLoading} setModal={setModal}
                             />
                             {!addToCartData?.is_digital_only && <DeliveryOptions values={values} setFieldValue={setFieldValue} />}
                             <PaymentOptions values={values} setFieldValue={setFieldValue} />
