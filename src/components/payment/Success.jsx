@@ -5,12 +5,27 @@ import Breadcrumb from '../common/Breadcrumb';
 import WrapperComponent from '../common/WrapperComponent';
 import OrderSuccessImage from '../../../public/assets/images/inner-page/order-success.png';
 import Btn from '@/elements/buttons/Btn';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslation } from "react-i18next";
+import { useEffect } from 'react';
+import request from '@/utils/axiosUtils';
+import { ClickToPayWebhookAPI } from '@/utils/axiosUtils/API';
 
 const PaymentSuccessComponent = () => {
     const router = useRouter();
+    const searchParams = useSearchParams();
     const { t } = useTranslation('common');
+
+    useEffect(() => {
+        const orderId = searchParams.get('orderId');
+        if (orderId) {
+            request({
+                url: ClickToPayWebhookAPI,
+                method: 'POST',
+                data: { orderId: orderId }
+            }, router);
+        }
+    }, [searchParams, router]);
 
     return (
         <>
@@ -25,7 +40,7 @@ const PaymentSuccessComponent = () => {
                     <div className='contain-404'>
                         <h2 className='mb-3'>Votre paiement a été effectué avec succès !
                         </h2>
-                        <p className='text-content'>Merci pour votre paiement. Votre commande est en cours de traitement et vous recevrez un e-mail de confirmation sous peu.</p>
+                        <p className='text-content'>Merci pour votre paiement. Votre commande {searchParams.get('orderId') ? `#${searchParams.get('orderId')}` : ''} est en cours de traitement et vous recevrez un e-mail de confirmation sous peu.</p>
                         <Btn id='back_button' className='btn-md text-white theme-bg-color mt-4 mx-auto' title={'Back to Home'} onClick={() => router.push('/')} />
                     </div>
                 </Col>

@@ -9,18 +9,18 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useTranslation } from "react-i18next";
 import { Col, Input, Label } from 'reactstrap';
 
-const LoginForm = ({mutate, isLoading}) => {
+const LoginForm = ({ mutate, isLoading }) => {
   const { t } = useTranslation('common');
   const { settingData } = useContext(SettingContext);
   const reCaptchaRef = useRef()
-  
+
   return (
     <>
-      
+
       <Formik
         initialValues={{
-          email: 'john.customer@example.com',
-          password: '123456789',
+          email: '',
+          password: '',
           recaptcha: ''
         }}
         validationSchema={YupObject({

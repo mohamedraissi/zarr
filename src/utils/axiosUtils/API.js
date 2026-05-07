@@ -155,4 +155,5 @@ export const UpdateRTLApi = "/language/rtl";
 export const TranslationAPI = "/translation";
 
 //Zone
-export const ZonePointsApi = "/zone-by-point"
+export const ZonePointsApi = "/zone-by-point";
+export const ClickToPayWebhookAPI = "/clicktopay/webhook";

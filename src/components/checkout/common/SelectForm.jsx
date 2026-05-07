@@ -6,9 +6,9 @@ import { AllCountryCode } from '../../../data/AllCountryCode';
 import Btn from '@/elements/buttons/Btn';
 import { useTranslation } from "react-i18next";
 
-const SelectForm = ({ values, isLoading, data, setModal , isFooterDisplay=true }) => {
-  
-  const { t } = useTranslation( 'common');
+const SelectForm = ({ values, isLoading, data, setModal, isFooterDisplay = true }) => {
+
+  const { t } = useTranslation('common');
   return (
     <Form>
       <Row>
@@ -36,7 +36,7 @@ const SelectForm = ({ values, isLoading, data, setModal , isFooterDisplay=true }
             {
               name: 'state_id',
               require: 'true',
-              title: 'State',
+              title: 'state',
               toplabel: 'State',
               colprops: { xxl: 6, lg: 12, sm: 6 },
               inputprops: {
@@ -51,7 +51,7 @@ const SelectForm = ({ values, isLoading, data, setModal , isFooterDisplay=true }
         />
         <SimpleInputField
           nameList={[
-            { name: 'city', placeholder: t('enter_city'), toplabel: 'City', colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'true' },
+            { name: 'city', placeholder: t('enter_city'), toplabel: t('enter_city'), colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'true' },
             { name: 'pincode', placeholder: t('enter_pincode'), toplabel: 'pincode', colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'true' },
           ]}
         />
@@ -75,11 +75,11 @@ const SelectForm = ({ values, isLoading, data, setModal , isFooterDisplay=true }
         </div>
         {isFooterDisplay &&
           <ModalFooter className='ms-auto justify-content-end save-back-button'>
-          <Btn className='btn btn-md btn-theme-outline fw-bold' title='cancel' onClick={() => setModal(false)} />
-          <Btn className='btn-md fw-bold text-light theme-bg-color' type='submit' title='submit' loading={Number(isLoading)} />
-        </ModalFooter>
+            <Btn className='btn btn-md btn-theme-outline fw-bold' title='cancel' onClick={() => setModal(false)} />
+            <Btn className='btn-md fw-bold text-light theme-bg-color' type='submit' title='submit' loading={Number(isLoading)} />
+          </ModalFooter>
         }
-        
+
       </Row>
     </Form>
   );
