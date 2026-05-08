@@ -18,7 +18,7 @@ const PlaceOrder = ({ values, addToCartData, errors }) => {
   const [errorOrder, setErrorOrder] = useState("");
   const [disable, setDisable] = useState(true);
 
-  const { data, mutate, isLoading } = useCreate(OrderAPI, false, false, true, (resDta) => {
+  const { data, mutate, isPending: isLoading } = useCreate(OrderAPI, false, false, true, (resDta) => {
     if (resDta?.status == 200 || resDta?.status == 201) {
       resDta?.data?.order_number && setGetOrderNumber(resDta?.data?.order_number);
       if (values["payment_method"] == "cod" || (values["payment_method"] == "bank_transfer" && !resDta?.data?.is_guest)) {
@@ -90,11 +90,11 @@ const PlaceOrder = ({ values, addToCartData, errors }) => {
   return (
     <>
       {addToCartData?.is_digital_only ? (
-        <Btn className="btn-md fw-bold mt-4 text-white theme-bg-color w-100" loading={Number(isLoading)} onClick={handleClick} disabled={values["billing_address_id"] && values["payment_method"] ? false : true}>
+        <Btn className="btn-md fw-bold mt-4 text-white theme-bg-color w-100" loading={isLoading} onClick={handleClick} disabled={Boolean(isLoading || (values["billing_address_id"] && values["payment_method"] ? false : true))}>
           {t("place_order")}
         </Btn>
       ) : (
-        <Btn className="btn-md fw-bold mt-4 text-white theme-bg-color w-100" loading={Number(isLoading)} onClick={handleClick} disabled={disable}>
+        <Btn className="btn-md fw-bold mt-4 text-white theme-bg-color w-100" loading={isLoading} onClick={handleClick} disabled={Boolean(isLoading || disable)}>
           {t("place_order")}
         </Btn>
       )}

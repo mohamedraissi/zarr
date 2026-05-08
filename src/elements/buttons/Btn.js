@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { Button } from "reactstrap";
+import { Button, Spinner } from "reactstrap";
 
 import { useTranslation } from "react-i18next";
 
@@ -7,13 +6,12 @@ const Btn = (props) => {
 
   const { t } = useTranslation('common');
   const { loading, title, children, ...rest } = props;
-  console.log(title)
   return (
-    <Button {...rest}>
+    <Button {...rest} disabled={Boolean(rest.disabled || loading)}>
       {loading ?
-        <div className={`d-flex position-relative${loading ? " spinning" : ""}`}>
+        <div className={`d-flex align-items-center justify-content-center gap-2`}>
+          <Spinner size="sm" />
           {children}
-          {t("title")}
         </div> :
         <>
           {children}

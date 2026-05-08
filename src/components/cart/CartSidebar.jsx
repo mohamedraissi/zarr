@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 const CartSidebar = () => {
   const { cartProducts, getTotal } = useContext(CartContext);
   const { convertCurrency } = useContext(SettingContext)
-  const { t } = useTranslation( 'common');
+  const { t } = useTranslation('common');
   const router = useRouter();
   const redirect = (path) => {
     router.push(`/${path}`)
@@ -62,7 +62,7 @@ const CartSidebar = () => {
         <div className='button-group cart-button'>
           <ul>
             <li>
-              <Link  href={`/checkout`} onClick={handelCheckout}  className='btn btn-animation proceed-btn fw-bold'>
+              <Link href={`/checkout`} onClick={handelCheckout} className='btn btn-animation proceed-btn fw-bold'>
                 {t('process_to_checkout')}
               </Link>
             </li>

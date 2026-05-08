@@ -3,11 +3,26 @@ import { Col } from 'reactstrap';
 import Breadcrumb from '../common/Breadcrumb';
 import WrapperComponent from '../common/WrapperComponent';
 import Btn from '@/elements/buttons/Btn';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { RiErrorWarningLine } from 'react-icons/ri';
+import { useEffect } from 'react';
+import request from '@/utils/axiosUtils';
+import { ClickToPayWebhookAPI } from '@/utils/axiosUtils/API';
 
 const PaymentErrorComponent = () => {
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        const orderId = searchParams.get('orderId');
+        if (orderId) {
+            request({
+                url: ClickToPayWebhookAPI,
+                method: 'POST',
+                data: { orderId: orderId }
+            }, router);
+        }
+    }, [searchParams, router]);
 
     return (
         <>
@@ -34,3 +49,4 @@ const PaymentErrorComponent = () => {
 };
 
 export default PaymentErrorComponent;
+
