@@ -36,8 +36,8 @@ const SettingProvider = (props) => {
       let amount = Number(value);
       amount = amount * (selectedCurrency?.exchange_rate ? selectedCurrency?.exchange_rate : settingObj?.general?.default_currency?.exchange_rate);
       if (position == "before_price") {
-        return `${symbol} ${amount.toFixed(2)}`;
-      } else return `${amount.toFixed(2)} ${symbol}`;
+        return `${symbol} ${amount.toFixed(3)}`;
+      } else return `${amount.toFixed(3)} ${symbol}`;
     },
     [settingObj, selectedCurrency]
   );

@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { useTranslation } from "react-i18next";
+import React, { useContext } from 'react';
+import ThemeOptionContext from '@/helper/themeOptionsContext';
 
 const LinkBox = ({ menu }) => {
-
+    const { setMobileSideBar } = useContext(ThemeOptionContext);
     const { t } = useTranslation('common');
     return (
        <>
@@ -11,7 +13,7 @@ const LinkBox = ({ menu }) => {
       {menu.link_type === "sub" ? (
         <h5 className="dropdown-header">{menu.title}</h5>
       ) : menu.link_type === "link" && menu.is_target_blank === 0 ? (
-        <Link className="dropdown-item" href={`/${menu?.path}`}>
+        <Link className="dropdown-item" href={`/${menu?.path}`} onClick={() => setMobileSideBar(false)}>
           {menu.title}
           {menu.badge_text && (
             <label className={`menu-label ${menu.badge_color}`}>
@@ -25,6 +27,7 @@ const LinkBox = ({ menu }) => {
           className="dropdown-item"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => setMobileSideBar(false)}
         >
           {menu.title}
           {menu.badge_text && (
@@ -34,6 +37,7 @@ const LinkBox = ({ menu }) => {
           )}
         </Link>
       )}
+
 
       {menu.child && (
         <ul>

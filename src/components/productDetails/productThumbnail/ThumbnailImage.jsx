@@ -51,8 +51,8 @@ const ThumbnailProductImage = ({ productState }) => {
     productState?.product?.product_galleries?.length > 0
       ? productState.product.product_galleries
       : productState?.product?.product_thumbnail
-      ? [productState.product.product_thumbnail]
-      : [defaultImage];
+        ? [productState.product.product_thumbnail]
+        : [defaultImage];
 
   const { t } = useTranslation("common");
   return (
@@ -114,7 +114,7 @@ const ThumbnailProductImage = ({ productState }) => {
           </div>
         </Col>
 
-        {productState?.product?.product_galleries?.length > 0 && (
+        {productState?.product?.product_galleries?.length > 1 && (
           <Col xs={12}>
             <div className="bottom-slider-image left-slider slick-top no-arrow">
               <Slider

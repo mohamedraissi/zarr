@@ -6,12 +6,16 @@ import LinkWithImage from "../../../../public/assets/images/menu_banner_3.jpg";
 import LinkBox from "./LinkBox";
 import MenuSlider from "./MenuSlider";
 
+import React, { useContext } from "react";
+import ThemeOptionContext from "@/helper/themeOptionsContext";
 const MenuList = ({ menu, isOpen, setIsOpen, level }) => {
+  const { setMobileSideBar } = useContext(ThemeOptionContext);
   const { t } = useTranslation("common");
   const router = useRouter();
   const cookieUAT = Cookies.get("uaf");
 
   const redirect = (path) => {
+    setMobileSideBar(false);
     router.push(`/${path}`);
   };
 
@@ -94,6 +98,7 @@ const MenuList = ({ menu, isOpen, setIsOpen, level }) => {
               isOpen[level] === menu.title ? "show" : ""
             }`}
             href={menu.path}
+            onClick={() => setMobileSideBar(false)}
           >
             {menu.title}
             {menu.badge_text && (

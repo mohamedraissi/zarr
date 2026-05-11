@@ -35,27 +35,27 @@ const SliderImage = ({ productState }) => {
             </div>
           ) : null}
           <Slider {...productDetailTopSlider}>
-          {productState?.product?.product_galleries?.map((image, i) => (
-                <div key={i}>
-                  <div className='slider-image position-relative'>
-                    {videType.includes(image.mime_type) ? (
-                      <>
-                        <video className="w-100 " controls>
-                          <source src={image ? image?.original_url : ''} type={image?.mime_type}></source>
-                        </video>
-                      </>
-                    ) : audioType.includes(image?.mime_type) ? (
-                      <div className="slider-main-img">
-                        <audio controls>
-                          <source src={image ? image.original_url : ''} type={image.mime_type}></source>
-                        </audio>
-                      </div>
-                    ) : image?.original_url &&
-                    <Image src={image?.original_url} className='img-fluid' alt={image?.name || ""} height={264} width={264}/>
-                    }
-                  </div>
+            {productState?.product?.product_galleries?.map((image, i) => (
+              <div key={i}>
+                <div className='slider-image position-relative'>
+                  {videType.includes(image.mime_type) ? (
+                    <>
+                      <video className="w-100 " controls>
+                        <source src={image ? image?.original_url : ''} type={image?.mime_type}></source>
+                      </video>
+                    </>
+                  ) : audioType.includes(image?.mime_type) ? (
+                    <div className="slider-main-img">
+                      <audio controls>
+                        <source src={image ? image.original_url : ''} type={image.mime_type}></source>
+                      </audio>
+                    </div>
+                  ) : image?.original_url &&
+                  <Image src={image?.original_url} className='img-fluid' alt={image?.name || ""} height={264} width={264} />
+                  }
                 </div>
-              ))}
+              </div>
+            ))}
             {/* {productState?.product?.product_galleries?.map((elem, i) => (
               <div key={i}>
                 <div className='product-slider-image'>

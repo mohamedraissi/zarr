@@ -1,15 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Btn from '@/elements/buttons/Btn';
 import MainHeaderMenu from './MainHeaderMenu';
 
 import { useTranslation } from "react-i18next";
 import ThemeOptionContext from '@/helper/themeOptionsContext';
 import { RiCloseLine } from 'react-icons/ri';
+import { usePathname } from 'next/navigation';
 
 const ClassicHeaderMenu = () => {
-  
+  const pathname = usePathname();
   const { mobileSideBar, setMobileSideBar } = useContext(ThemeOptionContext);
   const { t } = useTranslation( 'common');
+
+  useEffect(() => {
+    setMobileSideBar(false);
+  }, [pathname]);
+
   return (
     <div className='header-nav-middle'>
       <div className='main-nav navbar navbar-expand-xl navbar-light navbar-sticky'>
@@ -20,7 +26,11 @@ const ClassicHeaderMenu = () => {
               <RiCloseLine/>
             </Btn>
           </div>
-          <div className='offcanvas-body'>
+          <div className='offcanvas-body' onClick={(e) => {
+            if (e.target.closest('a') && !e.target.closest('.dropdown-toggle')) {
+              setMobileSideBar(false);
+            }
+          }}>
             <MainHeaderMenu />
           </div>
         </div>

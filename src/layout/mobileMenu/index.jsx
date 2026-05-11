@@ -6,10 +6,10 @@ import CartContext from '@/helper/cartContext';
 import { useTranslation } from 'react-i18next';
 
 const MobileMenu = () => {
-  
+
   const pathName = usePathname();
   const [active, setActive] = useState({});
-  const { t } = useTranslation( 'common');
+  const { t } = useTranslation('common');
   const { cartProducts } = useContext(CartContext);
 
   useEffect(() => {
@@ -26,22 +26,22 @@ const MobileMenu = () => {
         setActive(''); // Set to an empty string if the path is not found
       }
     }
-  }, [pathName,  footerMenuItems]);
+  }, [pathName, footerMenuItems]);
   return (
     <div className='mobile-menu d-md-none d-block mobile-cart'>
       <ul>
         {footerMenuItems.map((data, index) => (
-          <li className={`${active?.title == data?.title ? 'active' : ''} ${data.className ? data.className : ''}`} key={index} onClick={() => setActive(data)}>
+          <li className={`${active?.title == data?.title ? 'active' : ''} ${data.className ? data.className : ''} ${data.title == "Search" ? "d-flex justify-content-center align-items-center" : ""}`} key={index} onClick={() => setActive(data)}>
 
-             {data.path === '/cart' && cartProducts?.length > 0 && (
-                <span className='badge'>
+            {data.path === '/cart' && cartProducts?.length > 0 && (
+              <span className='badge'>
                 {cartProducts?.length}
                 <span className='visually-hidden'>{t('unread_messages')}</span>
               </span>
-              )}
+            )}
             <Link href={`${data.path}`} >
               {active?.title == data?.title ? data.fillIcon : data.lineIcon}
-              <span>{data.title}</span>
+              {data?.title != "Search" && <span>{t(data.title?.toLowerCase()?.replace(/\s+/g, '_'))}</span>}
             </Link>
           </li>
         ))}

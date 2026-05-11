@@ -37,7 +37,7 @@ const CartSidebar = () => {
           <ul>
             <li>
               <h4>{t('subtotal')}</h4>
-              <h4 className='price'>{convertCurrency(getTotal(cartProducts)?.toFixed(2))}</h4>
+              <h4 className='price'>{convertCurrency(getTotal(cartProducts)?.toFixed(3))}</h4>
             </li>
 
             <li className='align-items-start'>
@@ -55,7 +55,7 @@ const CartSidebar = () => {
         <ul className='summery-total'>
           <li className='list-total border-top-0'>
             <h4>{t('total')}</h4>
-            <h4 className='price theme-color'>{convertCurrency(getTotal(cartProducts)?.toFixed(2))}</h4>
+            <h4 className='price theme-color'>{convertCurrency(getTotal(cartProducts)?.toFixed(3))}</h4>
           </li>
         </ul>
 
