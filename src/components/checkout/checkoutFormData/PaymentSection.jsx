@@ -4,18 +4,15 @@ import { Fragment, useContext, useEffect, useState } from 'react';
 import SettingContext from '@/helper/settingContext';
 import { ModifyString } from '@/utils/customFunctions/ModifyString';
 
-const PaymentSection = ({ values, setFieldValue,}) => {
-    const { t } = useTranslation( 'common');
+const PaymentSection = ({ values, setFieldValue, }) => {
+    const { t } = useTranslation('common');
     const { settingData } = useContext(SettingContext);
-    const [intial, setInitial] = useState('');
-    useEffect(() => {
-        setFieldValue('payment_method', 'cod');
-        setInitial(0);
-    }, []);
+    const [intial, setInitial] = useState(null);
+
     return (
         <div className="checkbox-main-box">
             <div className="checkout-title1">
-                <h2>{'Payment Details'}</h2>
+                <h2>{t('payment_details')}</h2>
             </div>
             <Row className='g-sm-4 g-3'>
                 {settingData?.payment_methods?.map((elem, i) => (
@@ -28,7 +25,7 @@ const PaymentSection = ({ values, setFieldValue,}) => {
                                             <Input
                                                 className='form-check-input'
                                                 id={elem?.name}
-                                                checked={i == intial}
+                                                checked={i === intial}
                                                 type='radio'
                                                 name='payment_method'
                                                 onChange={() => {

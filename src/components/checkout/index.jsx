@@ -4,6 +4,7 @@ import SettingContext from '@/helper/settingContext';
 import { AddToCartAPI, AddressAPI } from '@/utils/axiosUtils/API';
 import useCreate from '@/utils/hooks/useCreate';
 import { emailSchema, nameSchema, idCreateAccount, phoneSchema } from '@/utils/validation/ValidationSchemas';
+import { useTranslation } from "react-i18next";
 import { Form, Formik } from 'formik';
 import Cookies from 'js-cookie';
 import { usePathname, useRouter } from 'next/navigation';
@@ -22,6 +23,7 @@ import request from '@/utils/axiosUtils';
 
 
 const CheckoutContent = () => {
+  const { t } = useTranslation('common');
   const { accountData, refetch } = useContext(AccountContext);
   const { settingData } = useContext(SettingContext);
   const [address, setAddress] = useState([]);
@@ -90,14 +92,14 @@ const CheckoutContent = () => {
   });
 
   const addressSchema = Yup.object().shape({
-    title: nameSchema,
-    street: nameSchema,
-    city: nameSchema,
-    country_code: nameSchema,
-    phone: phoneSchema,
-    pincode: nameSchema,
-    country_id: nameSchema,
-    state_id: nameSchema,
+    title: Yup.string().required(t('title_is_required')),
+    street: Yup.string().required(t('street_is_required')),
+    city: Yup.string().required(t('city_is_required')),
+    country_code: Yup.string().required(t('country_code_is_required')),
+    phone: Yup.string().min(8, t('phone_too_short')).max(15, t('phone_too_long')).required(t('phone_is_required')),
+    pincode: Yup.string(),
+    country_id: Yup.string().required(t('country_is_required')),
+    state_id: Yup.string().required(t('state_is_required')),
   })
   return (
     <Fragment>
@@ -106,12 +108,17 @@ const CheckoutContent = () => {
         <Formik
           initialValues={initValues}
           validationSchema={Yup.object().shape({
-            name: nameSchema,
-            email: emailSchema,
-            phone: phoneSchema,
-            password: idCreateAccount,
+            name: Yup.string().required(t('name_is_required')),
+            email: Yup.string().email(t('invalid_email')).required(t('email_is_required')),
+            phone: Yup.string().min(8, t('phone_too_short')).max(15, t('phone_too_long')).required(t('phone_is_required')),
+            password: Yup.string().when("create_account", {
+              is: true,
+              then: (schema) => schema.required(t('password_is_required')).min(8, t('password_too_short')),
+              otherwise: (schema) => schema.notRequired()
+            }),
             shipping_address: addressSchema,
-            billing_address: addressSchema
+            billing_address: addressSchema,
+            payment_method: Yup.string().required(t('payment_method_is_required')),
           })}
           onSubmit={mutate}>
           {({ values, setFieldValue, errors }) => (

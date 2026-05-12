@@ -54,7 +54,7 @@ const HeaderCartBottom = ({
                   {convertCurrency(shippingFreeAmt - getTotal(cartProducts))}
                 </span>{" "}
                 {t("more_and_enjoy")}{" "}
-                <span className="shipping">{t("free_shipping!")}</span>
+                <span className="shipping">{t("free_shipping")} !</span>
               </p>
             ) : (
               <p>

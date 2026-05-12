@@ -52,7 +52,7 @@ const SelectForm = ({ values, isLoading, data, setModal, isFooterDisplay = true 
         <SimpleInputField
           nameList={[
             { name: 'city', placeholder: t('enter_city'), toplabel: t('enter_city'), colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'true' },
-            { name: 'pincode', placeholder: t('enter_pincode'), toplabel: 'pincode', colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'true' },
+            { name: 'pincode', placeholder: t('enter_pincode'), toplabel: 'pincode', colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'false' },
           ]}
         />
         <div className='country-input'>

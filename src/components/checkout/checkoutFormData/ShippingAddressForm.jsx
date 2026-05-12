@@ -9,7 +9,7 @@ const ShippingAddressForm = ({ values, data, }) => {
     return (
         <div className="checkbox-main-box">
             <div className="checkout-title1">
-                <h2>{`Shipping Details`}</h2>
+                <h2>{t('shipping_details')}</h2>
             </div>
             <Row>
                 <SimpleInputField
@@ -39,7 +39,7 @@ const ShippingAddressForm = ({ values, data, }) => {
                             name: 'shipping_address.state_id',
                             require: 'true',
                             title: 'state',
-                            toplabel: 'State',
+                            toplabel: 'Région',
                             colprops: { xxl: 6, lg: 12, sm: 6 },
                             inputprops: {
                                 name: 'shipping_address.state_id',
@@ -54,7 +54,7 @@ const ShippingAddressForm = ({ values, data, }) => {
                 <SimpleInputField
                     nameList={[
                         { name: 'shipping_address.city', placeholder: t('enter_city'), toplabel: 'city', colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'true' },
-                        { name: 'shipping_address.pincode', placeholder: t('enter_pincode'), toplabel: 'pincode', colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'true' },
+                        { name: 'shipping_address.pincode', placeholder: t('enter_pincode'), toplabel: 'pincode', colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'false' },
                     ]}
                 />
                 <div className='country-input'>

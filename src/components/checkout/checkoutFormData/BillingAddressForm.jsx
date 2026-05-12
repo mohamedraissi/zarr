@@ -39,7 +39,7 @@ const BillingAddressForm = ({ values, setFieldValue, errors, data }) => {
     return (
         <div className="checkbox-main-box">
             <div className="checkout-title1">
-                <h2>{`Billing Details`}</h2>
+                <h2>{t('billing_details')}</h2>
             </div>
             <Row>
 
@@ -79,7 +79,7 @@ const BillingAddressForm = ({ values, setFieldValue, errors, data }) => {
                             name: 'billing_address.state_id',
                             require: 'true',
                             title: 'state',
-                            toplabel: 'State',
+                            toplabel: 'Région',
                             colprops: { xxl: 6, lg: 12, sm: 6 },
                             inputprops: {
                                 name: 'billing_address.state_id',
@@ -94,7 +94,7 @@ const BillingAddressForm = ({ values, setFieldValue, errors, data }) => {
                 <SimpleInputField
                     nameList={[
                         { name: 'billing_address.city', placeholder: t('enter_city'), toplabel: 'city', colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'true' },
-                        { name: 'billing_address.pincode', placeholder: t('enter_pincode'), toplabel: 'pincode', colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'true' },
+                        { name: 'billing_address.pincode', placeholder: t('enter_pincode'), toplabel: 'pincode', colprops: { xxl: 6, lg: 12, sm: 6 }, require: 'false' },
                     ]}
                 />
                 <div className='country-input'>

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import SettingContext from '@/helper/settingContext';
 
 const DeliverySection = ({ values, setFieldValue }) => {
-    const { t } = useTranslation( 'common');
+    const { t } = useTranslation('common');
     const { settingData } = useContext(SettingContext);
     const [defaultDe, setDefaultDe] = useState(0);
     useEffect(() => {
@@ -17,7 +17,7 @@ const DeliverySection = ({ values, setFieldValue }) => {
     return (
         <div className="checkbox-main-box">
             <div className="checkout-title1">
-                <h2>{'Delivery Details'}</h2>
+                <h2>{t('delivery_details')}</h2>
             </div>
             <Row className='g-4'>
                 <Col xxl={6}>

@@ -1,6 +1,7 @@
 import request from "@/utils/axiosUtils";
 import { CountryAPI } from "@/utils/axiosUtils/API";
 import { YupObject, nameSchema, phoneSchema } from "@/utils/validation/ValidationSchemas";
+import * as Yup from "yup";
 import { useQuery } from "@tanstack/react-query";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
@@ -35,13 +36,13 @@ const AddAddressForm = ({ mutate, isLoading, type, editAddress, setEditAddress, 
         country_code: editAddress ? editAddress?.country_code : "216",
       }}
       validationSchema={YupObject({
-        title: nameSchema,
-        street: nameSchema,
-        city: nameSchema,
-        country_id: nameSchema,
-        state_id: nameSchema,
-        pincode: nameSchema,
-        phone: phoneSchema,
+        title: Yup.string().required(t('title_is_required')),
+        street: Yup.string().required(t('street_is_required')),
+        city: Yup.string().required(t('city_is_required')),
+        country_id: Yup.string().required(t('country_is_required')),
+        state_id: Yup.string().required(t('state_is_required')),
+        pincode: Yup.string(),
+        phone: Yup.string().min(8, t('phone_too_short')).max(15, t('phone_too_long')).required(t('phone_is_required')),
       })}
       onSubmit={(values) => {
         if (editAddress) {
