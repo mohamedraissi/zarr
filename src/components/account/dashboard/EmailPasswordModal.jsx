@@ -10,7 +10,7 @@ import UpdatePasswordForm from './UpdatePasswordForm';
 
 const EmailPasswordModal = ({ modal, setModal }) => {
   const { accountData, setAccountData } = useContext(AccountContext);
-  const { data, mutate, isLoading } = useCreate(modal == 'email' ? UpdateProfileAPI : UpdateProfilePasswordAPI, false, false, 'No', (resDta) => {
+  const { data, mutate, isPending: isLoading } = useCreate(modal == 'email' ? UpdateProfileAPI : UpdateProfilePasswordAPI, false, false, 'No', (resDta) => {
     if (resDta.status == 200 || resDta.status == 201) {
       setModal('');
       {

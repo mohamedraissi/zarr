@@ -16,7 +16,7 @@ const RefundModal = ({ modal, setModal, storeData }) => {
   
   const { t } = useTranslation( 'common');
   const { convertCurrency } = useContext(SettingContext);
-  const { mutate, isLoading } = useCreate(RefundAPI, false, false, false, (resDta) => {
+  const { mutate, isPending: isLoading } = useCreate(RefundAPI, false, false, false, (resDta) => {
     if (resDta.status == 200 || resDta.status == 201) {
       setModal(false);
     }

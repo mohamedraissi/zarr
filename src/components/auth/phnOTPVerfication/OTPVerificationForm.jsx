@@ -15,7 +15,7 @@ const OTPVerificationForm = () => {
   const phone = Cookies.get('up');
   const [otp, setOtp] = useState('');
   const { t } = useTranslation('common');
-  const { mutate: phnOtpVerification } = usePhnOtpVerification(setShowBoxMessage);
+  const { mutate: phnOtpVerification, isPending: isLoading } = usePhnOtpVerification(setShowBoxMessage);
   const handleChange = (e) => {
     if (e.target.value.length <= 5 && !isNaN(Number(e.target.value))) {
       setOtp(e.target.value);
@@ -47,7 +47,7 @@ const OTPVerificationForm = () => {
                 <Input type='text' className='no-background' maxLength='5' onChange={handleChange} value={otp} />
               </div>
             </div>
-            <FormBtn title={'validate'} classes={{ btnClass: 'btn btn-animation w-100 mt-3' }} />
+            <FormBtn title={'validate'} classes={{ btnClass: 'btn btn-animation w-100 mt-3' }} loading={isLoading} />
           </Form>
         )}
       </Formik>

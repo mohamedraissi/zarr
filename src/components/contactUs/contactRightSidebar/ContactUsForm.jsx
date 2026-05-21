@@ -11,7 +11,7 @@ import { ToastNotification } from '@/utils/customFunctions/ToastNotification';
 
 const ContactUsForm = () => {
   const { t } = useTranslation( 'common');
-  const { mutate, isLoading } = useCreate(ContactUsAPI, false, false, 'No',(resDta)=>ToastNotification("success",resDta?.data?.message ));
+  const { mutate, isPending: isLoading } = useCreate(ContactUsAPI, false, false, 'No',(resDta)=>ToastNotification("success",resDta?.data?.message ));
   return (
     <Formik
       initialValues={{ name: '', email: '', phone: '', subject: '', message: '' }}

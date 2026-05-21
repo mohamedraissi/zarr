@@ -17,7 +17,7 @@ import LoginForm from './LoginForm';
 const LoginContent = () => {
   const { t } = useTranslation('common');
   const [showBoxMessage, setShowBoxMessage] = useState();
-  const { mutate, isLoading } = useHandleLogin(setShowBoxMessage);
+  const { mutate, isPending: isLoading } = useHandleLogin(setShowBoxMessage);
   const { settingData } = useContext(SettingContext);
 
   return (

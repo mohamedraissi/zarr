@@ -14,7 +14,7 @@ const AddToCompare = ({ productObj, customClass, hideAction }) => {
   const cookieUAT = Cookies.get('uaf');
   const router = useRouter();
   const pathname = usePathname();
-  const { data, mutate, isLoading } = useCreate(CompareAPI, false, false, 'Added to Compare List');
+  const { data, mutate, isPending: isLoading } = useCreate(CompareAPI, false, false, 'Added to Compare List');
   const addToCompare = (productObj) => {
     if (!cookieUAT) {
       const queryParams = new URLSearchParams({ ...brand, ...attribute, ...price, ...sortBy, ...field, ...rating, ...layout, ...category ,...theme }).toString();

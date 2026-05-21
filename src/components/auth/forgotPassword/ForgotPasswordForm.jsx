@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const ForgotPasswordForm = () => {
   const { t } = useTranslation( 'common');
-  const { mutate, isLoading } = useHandleForgotPassword();
+  const { mutate, isPending: isLoading } = useHandleForgotPassword();
   return (
     <>
       <Formik

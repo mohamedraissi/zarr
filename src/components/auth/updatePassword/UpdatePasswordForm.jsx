@@ -9,7 +9,7 @@ import FormBtn from '@/components/common/FormBtn';
 const UpdatePasswordForm = () => {
   
   const { t } = useTranslation( 'common');
-  const { mutate, isLoading } = useUpdatePassword();
+  const { mutate, isPending: isLoading } = useUpdatePassword();
   return (
     <Formik
       initialValues={{

@@ -22,7 +22,7 @@ const NavTabTitles = ({ classes = {}, activeTab, setActiveTab, titleList, isLogo
       return activeTab == String(index + 1);
     }
   };
-  const { mutate, isLoading } = useCreate(LogoutAPI, false, false, 'No', () => {
+  const { mutate, isPending: isLoading } = useCreate(LogoutAPI, false, false, 'No', () => {
     setAccountData();
     Cookies.remove('uaf', { path: '/' });
     Cookies.remove('ue');

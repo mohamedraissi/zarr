@@ -27,7 +27,7 @@ const BankDetailForm = () => {
   useEffect(() => {
     refetch();
   }, []);
-  const { mutate, isLoading } = useCreate(PaymentAccountAPI, false, false, 'Account Details Updated Successfully.');
+  const { mutate, isPending: isLoading } = useCreate(PaymentAccountAPI, false, false, 'Account Details Updated Successfully.');
   if (paymentLoader) return <Loader />;
   return (
     <>

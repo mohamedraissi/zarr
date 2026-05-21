@@ -17,7 +17,7 @@ const HeaderProfile = ({ extraClass }) => {
   const [modal, setModal] = useState(false);
   const isAuthenticated = Cookies.get('uaf');
   const { t } = useTranslation('common');
-  const { mutate, isLoading } = useCreate(LogoutAPI, false, false, 'No', () => {
+  const { mutate, isPending: isLoading } = useCreate(LogoutAPI, false, false, 'No', () => {
     setAccountData();
     Cookies.remove('uaf');
     Cookies.remove('ue');

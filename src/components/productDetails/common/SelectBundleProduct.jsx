@@ -17,7 +17,7 @@ const SelectBundleProduct = ({ crossSellProduct }) => {
   const { convertCurrency } = useContext(SettingContext);
   const { filteredProduct } = useContext(ProductIdsContext);
   const [selectedProductIds, setSelectedProductIds] = useState([]);
-  const { data: addData, mutate, isLoading } = useCreate(AddToCartAPI, false, false, 'No');
+  const { data: addData, mutate, isPending: isLoading } = useCreate(AddToCartAPI, false, false, 'No');
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const onProductCheck = (event) => {

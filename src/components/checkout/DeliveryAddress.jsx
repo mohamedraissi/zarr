@@ -9,7 +9,7 @@ import ShowAddress from './ShowAddress';
 
 const DeliveryAddress = ({ type, title, address, modal, mutate, isLoading, setModal, setFieldValue }) => {
   const { t } = useTranslation('common');
-  console.log("address : ", title)
+
   useEffect(() => {
     address?.length > 0 && setFieldValue(`${type}_address_id`, address[0].id);
   }, [address]);

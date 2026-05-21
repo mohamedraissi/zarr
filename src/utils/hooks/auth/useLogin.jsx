@@ -78,7 +78,7 @@ const useHandleLogin = (setShowBoxMessage) => {
   const { refetch: compareRefetch } = useContext(CompareContext);
   const router = useRouter();
   if (CallBackUrl === router.pathname) {
-    console.log("Already on the same page:", CallBackUrl);
+
   }
 
   return useMutation({

@@ -45,7 +45,7 @@ contactForm.addEventListener('submit', (event) => {
     const data = Object.fromEntries(formData);
 
     // Here you would typically send the data to your backend
-    console.log('Form submitted:', data);
+
 
     // Show success message
     alert('Merci pour votre message ! Nous vous contacterons bientôt.');

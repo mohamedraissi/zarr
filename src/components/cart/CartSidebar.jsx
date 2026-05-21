@@ -18,12 +18,14 @@ const CartSidebar = () => {
     router.push(`/${path}`)
   }
   const handelCheckout = () => {
-    if (!isAuth) {
+    /*if (!isAuth) {
       Cookies.set("CallBackUrl", 'checkout');
       redirect('auth/login');
     } else {
       redirect('checkout');
-    }
+    }*/
+
+    redirect('checkout');
   };
   const isAuth = Cookies.get('uaf');
   return (

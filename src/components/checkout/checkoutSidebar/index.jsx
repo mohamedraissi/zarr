@@ -24,7 +24,7 @@ const CheckoutSidebar = ({ values, setFieldValue, errors, addToCartData }) => {
   const { settingData } = useContext(SettingContext);
   const access_token = Cookies.get('uaf');
 
-  const { data, mutate, isLoading } = useCreate(CheckoutAPI, false, false, true, (resDta) => {
+  const { data, mutate, isPending: isLoading } = useCreate(CheckoutAPI, false, false, true, (resDta) => {
     if (resDta?.status == 200 || resDta?.status == 201) {
       setErrorCoupon('');
       storeCoupon !== '' && setAppliedCoupon('applied');

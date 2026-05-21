@@ -12,7 +12,7 @@ import SettingContext from '@/helper/settingContext';
 import { useContext } from 'react';
 
 const RegisterContent = () => {
-  const { t } = useTranslation( 'common');
+  const { t } = useTranslation('common');
   const { settingData } = useContext(SettingContext);
   return (
     <>
@@ -20,13 +20,13 @@ const RegisterContent = () => {
       <WrapperComponent classes={{ sectionClass: 'log-in-section section-b-space', fluidClass: 'w-100' }} customCol={true}>
         <Col xxl={6} xl={5} lg={6} className='d-lg-block d-none ms-auto'>
           <div className='image-contain'>
-          {signUpImage &&  <Image src={signUpImage} className='img-fluid' alt='sign-up' height={465} width={550} />}
+            {signUpImage && <Image src={signUpImage} className='img-fluid' alt='sign-up' height={465} width={550} />}
           </div>
         </Col>
 
         <Col xxl={4} xl={5} lg={6} sm={8} className='mx-auto'>
           <div className='log-in-box'>
-            <AuthHeadings heading1={`Welcome to ${settingData?.general?.site_name}`} heading2={'CreateNewAccount'} />
+            <AuthHeadings heading1={`Bienvenue à ${settingData?.general?.site_name}`} heading2={'CreateNewAccount'} />
 
             <div className='input-box'>
               <RegisterForm />

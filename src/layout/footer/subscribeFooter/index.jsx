@@ -14,7 +14,7 @@ import LiveImagePath from "@/utils/constants";
 const SubscribeFooter = () => {
   const { t } = useTranslation("common");
   const { themeOption } = useContext(ThemeOptionContext);
-  const { mutate, isLoading } = useCreate(SubscribeAPI, false, false, "No", (resDta) => ToastNotification("success", resDta?.data?.message));
+  const { mutate, isPending: isLoading } = useCreate(SubscribeAPI, false, false, "No", (resDta) => ToastNotification("success", resDta?.data?.message));
   const getText = (text) => {
     const words = text?.split(" ");
     const firstTwoWords = words?.slice(0, 2).join(" ");
@@ -47,7 +47,7 @@ const SubscribeFooter = () => {
                 <Form>
                   <div className="input-box input-group">
                     <Field type="email" placeholder="Enter Your Email" name="email" className="form-control" />
-                    <Btn className="sub-btn">
+                    <Btn className="sub-btn" loading={Number(isLoading)}>
                       <span>{t("subscribe")}</span>
                     </Btn>
                   </div>

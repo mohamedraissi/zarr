@@ -9,7 +9,8 @@ const ShowBox = ({ showBoxMessage }) => {
       {showBoxMessage ? <BiError /> : <BiCheckShield />}
       <div>
         <h4>{showBoxMessage ? t("ThereWasAProblem") : t("Success")} </h4>
-        <p>{t(showBoxMessage)}</p>
+        <p>{t("Aucun compte n'est associé à l'adresse e-mail fournie.")}</p>
+
       </div>
     </div>
   );

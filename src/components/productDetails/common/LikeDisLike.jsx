@@ -9,7 +9,7 @@ const LikeDisLike = ({ qna, refetch }) => {
   const [likeCount, setLikeCount] = useState(0);
   const [unLikeCount, setUnLikeCount] = useState(0);
   const isLogin = Cookies.get("uaf");
-  const { mutate, isLoading } = useCreate(FeedBackAPI, false, false, "No", (resDta) => {refetch();});
+  const { mutate, isPending: isLoading } = useCreate(FeedBackAPI, false, false, "No", (resDta) => {refetch();});
   useEffect(() => {
     setLikeUnLike(qna?.reaction);
     setLikeCount(qna?.total_likes);

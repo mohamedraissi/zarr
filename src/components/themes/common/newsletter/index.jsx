@@ -14,7 +14,7 @@ import  LiveImagePath  from '@/utils/constants';
 const NewsLetter = ({ dataAPI, style = 'basic' }) => {
   const { t } = useTranslation( 'common');
   const [errorOrder, setErrorOrder] = useState('');
-  const { mutate, isLoading } = useCreate(SubscribeAPI, false, false, true, (resDta) => {
+  const { mutate, isPending: isLoading } = useCreate(SubscribeAPI, false, false, true, (resDta) => {
     if (resDta?.status == 200 || resDta?.status == 201) {
      ToastNotification("success", resDta?.data?.message)
     }else{
@@ -44,7 +44,7 @@ const NewsLetter = ({ dataAPI, style = 'basic' }) => {
                               <div className="mail-icon">
                                 <RiMailLine />
                               </div>
-                              <Btn className='sub-btn btn-animation'>
+                              <Btn className='sub-btn btn-animation' loading={Number(isLoading)}>
                                 <span className='d-sm-block d-none'>{t('subscribe')}</span>
                                 <RiArrowRightLine />
                               </Btn>
@@ -84,7 +84,7 @@ const NewsLetter = ({ dataAPI, style = 'basic' }) => {
                                     <div className="mail-icon">
                                       <RiMailLine />
                                     </div>
-                                    <Btn className='bg-white btn btn-md fw-500 submit-button theme-color'>
+                                    <Btn className='bg-white btn btn-md fw-500 submit-button theme-color' loading={Number(isLoading)}>
                                       <span className='d-sm-block d-none'>{t('subscribe')}</span>
                                       <RiArrowRightLine />
                                     </Btn>

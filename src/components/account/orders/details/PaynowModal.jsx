@@ -15,7 +15,7 @@ const PaynowModal = ({ modal, setModal, params }) => {
   const { t } = useTranslation("common");
   const [initial, setInitial] = useState("");
   const { settingData } = useContext(SettingContext);
-  const { mutate, isLoading } = useCreate(RePaymentAPI, false, false, "No", (resDta) => {
+  const { mutate, isPending: isLoading } = useCreate(RePaymentAPI, false, false, "No", (resDta) => {
     if (resDta?.status == 200 || resDta?.status == 201) {
       if (resDta?.data?.["payment_method"] == "cod") {
         router.push(`/account/order/${resDta?.data?.order_number}`);

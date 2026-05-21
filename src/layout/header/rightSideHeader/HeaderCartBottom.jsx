@@ -35,12 +35,14 @@ const HeaderCartBottom = ({
     router.push(`/${path}`);
   };
   const handelCheckout = () => {
-    if (!isAuth) {
-      Cookies.set("CallBackUrl", "/checkout");
-      redirect("auth/login");
-    } else {
-      redirect("checkout");
-    }
+    /* if (!isAuth) {
+       Cookies.set("CallBackUrl", "/checkout");
+       redirect("auth/login");
+     } else {
+       redirect("checkout");
+     }*/
+    redirect('checkout');
+
   };
   return (
     <>

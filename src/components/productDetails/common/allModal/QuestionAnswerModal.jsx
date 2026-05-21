@@ -20,7 +20,7 @@ const QuestionAnswerModal = ({ modal, setModal, productState, update, refetch })
   const toggle = () => {
     setModal((prev) => prev !== prev);
   };
-  const { mutate, isLoading } = useCreate(QuestionAnswerAPI, false, false, 'Question Send Successfully', (resDta) => {
+  const { mutate, isPending: isLoading } = useCreate(QuestionAnswerAPI, false, false, 'Question Send Successfully', (resDta) => {
     if (resDta?.status == 200 || resDta?.status == 201) {
       refetch && refetch();
       setModal('');

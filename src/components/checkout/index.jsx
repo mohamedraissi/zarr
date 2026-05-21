@@ -85,7 +85,7 @@ const CheckoutContent = () => {
     access_token && !addToCartLoader && addToCartRefatch()
   }, [addToCartLoader, access_token])
 
-  const { mutate, isLoading } = useCreate(AddressAPI, false, false, 'Address Added successfully', (resDta) => {
+  const { mutate, isPending: isLoading } = useCreate(AddressAPI, false, false, 'Address Added successfully', (resDta) => {
     setAddress((prev) => [...prev, resDta?.data]);
     refetch();
     setModal('');

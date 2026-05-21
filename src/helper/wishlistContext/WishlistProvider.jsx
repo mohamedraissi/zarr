@@ -18,10 +18,10 @@ const WishlistProvider = (props) => {
   const { data: WishlistApiData, isLoading: WishlistAPILoading, refetch } = useQuery({queryKey: [WishlistAPI], queryFn: () => request({ url: WishlistAPI }, router), enabled: false, refetchOnWindowFocus: false, select: (res) => res?.data });
 
   // Adding data to Wishlist API
-  const { mutate, isLoading } = useCreate(WishlistAPI, false, false, "Added to Wishlist List");
+  const { mutate, isPending: isLoading } = useCreate(WishlistAPI, false, false, "Added to Wishlist List");
 
   // Delete Cart API Data
-  const { mutate: deleteWishlist, isLoading: deleteWishlistLoader } = useDelete(WishlistAPI, false, false, "Product Deleted from Wishlist");
+  const { mutate: deleteWishlist, isPending: deleteWishlistLoader } = useDelete(WishlistAPI, false, false, "Product Deleted from Wishlist");
 
   // Refetching Cart API
   useEffect(() => {
