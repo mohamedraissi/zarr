@@ -34,7 +34,7 @@ const PaymentSection = ({ values, setFieldValue, }) => {
                                                 }}
                                             />
                                             <Label className='form-check-label' htmlFor={elem.name}>
-                                                {ModifyString(elem?.name, 'upper')}
+                                                {ModifyString(elem?.title, 'upper')}
                                             </Label>
                                         </div>
                                     </div>

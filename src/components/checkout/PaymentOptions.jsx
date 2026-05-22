@@ -7,10 +7,17 @@ import SettingContext from '@/helper/settingContext';
 import { ModifyString } from '@/utils/customFunctions/ModifyString';
 
 const PaymentOptions = ({ values, setFieldValue }) => {
-  const { t } = useTranslation( 'common');
+  const { t } = useTranslation('common');
   const { settingData } = useContext(SettingContext);
   const [intial, setInitial] = useState(null);
 
+  useEffect(() => {
+    let firstActive = settingData?.payment_methods?.find((elem) => elem.status);
+    if (firstActive && !values['payment_method']) {
+      setFieldValue('payment_method', firstActive.name);
+      setInitial(settingData.payment_methods.indexOf(firstActive));
+    }
+  }, [settingData]);
   return (
     <CheckoutCard icon={<RiBankCardLine />}>
       <div className='checkout-title'>

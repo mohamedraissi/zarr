@@ -17,14 +17,14 @@ import emptyImage from '../../../../public/assets/svg/empty-items.svg';
 const CheckoutSidebar = ({ values, setFieldValue, errors, addToCartData }) => {
   const [storeCoupon, setStoreCoupon] = useState("");
   const { convertCurrency } = useContext(SettingContext);
-  const { cartProducts } = useContext(CartContext);
+  const { cartProducts, cartTotal } = useContext(CartContext);
   const { t } = useTranslation('common');
   const [errorCoupon, setErrorCoupon] = useState('');
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const { settingData } = useContext(SettingContext);
   const access_token = Cookies.get('uaf');
 
-  const { data, mutate, isPending: isLoading } = useCreate(CheckoutAPI, false, false, true, (resDta) => {
+  const { data, mutate, isLoading } = useCreate(CheckoutAPI, false, false, true, (resDta) => {
     if (resDta?.status == 200 || resDta?.status == 201) {
       setErrorCoupon('');
       storeCoupon !== '' && setAppliedCoupon('applied');
@@ -35,12 +35,11 @@ const CheckoutSidebar = ({ values, setFieldValue, errors, addToCartData }) => {
   // Submitting data on Checkout
   useEffect(() => {
     if (settingData?.activation?.guest_checkout && !access_token) {
-      if (Object.keys(errors).length == 0 && values['delivery_description'] && values['payment_method']) {
-        values['products'] = cartProducts;
-        values['products']?.length > 0 && mutate(values);
+      if (values['products']?.length > 0) {
+        mutate(values);
       }
     } else {
-      if (access_token && values['billing_address_id'] && values['shipping_address_id'] && values['delivery_description'] && values['payment_method']) {
+      if (access_token && values['billing_address_id'] && values['shipping_address_id']) {
         const targetObject = {
           coupon: values['coupon'],
           billing_address_id: values['billing_address_id'],
@@ -72,7 +71,7 @@ const CheckoutSidebar = ({ values, setFieldValue, errors, addToCartData }) => {
         }
       }
     }
-  }, [values['billing_address_id'], values['shipping_address_id'], values['payment_method'], values['delivery_description'], values['points_amount'], values['wallet_balance']]);
+  }, [values['billing_address_id'], values['shipping_address_id'], values['payment_method'], values['delivery_description'], values['points_amount'], values['wallet_balance'], cartProducts, access_token, settingData]);
 
   return (
     <Col xxl='4' xl='5'>
@@ -85,15 +84,15 @@ const CheckoutSidebar = ({ values, setFieldValue, errors, addToCartData }) => {
                 {isLoading && <Loader />}
                 <li>
                   <h4>{t('subtotal')}</h4>
-                  <h4 className='price'>{data?.data?.total?.sub_total ? convertCurrency(data?.data?.total?.sub_total) : t(`not_calculated_yet`)}</h4>
+                  <h4 className='price'>{data?.data?.total?.sub_total ? convertCurrency(data?.data?.total?.sub_total) : convertCurrency(cartTotal)}</h4>
                 </li>
                 <li>
                   <h4>{t('shipping')}</h4>
-                  <h4 className='price'>{data?.data?.total?.shipping_total >= 0 ? convertCurrency(data?.data?.total?.shipping_total) : t(`not_calculated_yet`)}</h4>
+                  <h4 className='price'>{data?.data?.total?.shipping_total >= 0 ? convertCurrency(data?.data?.total?.shipping_total) : convertCurrency(0)}</h4>
                 </li>
                 <li>
                   <h4>{t('tax')}</h4>
-                  <h4 className='price'>{data?.data?.total?.tax_total ? convertCurrency(data?.data?.total?.tax_total) : t(`not_calculated_yet`)}</h4>
+                  <h4 className='price'>{data?.data?.total?.tax_total >= 0 ? convertCurrency(data?.data?.total?.tax_total) : convertCurrency(0)}</h4>
                 </li>
 
                 <PointWallet values={values} setFieldValue={setFieldValue} data={data} />
@@ -102,11 +101,11 @@ const CheckoutSidebar = ({ values, setFieldValue, errors, addToCartData }) => {
 
                 <li className='list-total'>
                   <h4>{t('total')}</h4>
-                  <h4 className='price'>{data?.data?.total?.total ? convertCurrency(data?.data?.total?.total) : t(`not_calculated_yet`)}</h4>
+                  <h4 className='price'>{data?.data?.total?.total ? convertCurrency(data?.data?.total?.total) : convertCurrency(cartTotal)}</h4>
                 </li>
               </ul>
             </div>
-            <PlaceOrder addToCartData={addToCartData} values={values} errors={errors}/>
+            <PlaceOrder addToCartData={addToCartData} values={values} errors={errors} />
           </>
         ) :
           <NoDataFound
