@@ -1,6 +1,8 @@
+"use client";
+import dynamic from "next/dynamic";
 import { useContext, useEffect, useState } from "react";
-import BasicFooter from "./basicFooter";
-import SubscribeFooter from "./subscribeFooter";
+const BasicFooter = dynamic(() => import('./basicFooter'), { ssr: true });
+const SubscribeFooter = dynamic(() => import('./subscribeFooter'), { ssr: true });
 import { useSearchParams } from "next/navigation";
 import ThemeOptionContext from "@/helper/themeOptionsContext";
 

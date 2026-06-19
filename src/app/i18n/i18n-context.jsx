@@ -8,12 +8,17 @@ import { I18nextProvider as Provider, initReactI18next } from "react-i18next";
 import { getOptions } from "./settings";
 import request from "@/utils/axiosUtils";
 
-const loadResources = async (language, namespace) => {
+let resourcesPromise = null;
 
+const loadResources = async (language, namespace) => {
+  if (!resourcesPromise) {
+    resourcesPromise = request({url:`${process.env.URL}/translation/front`}, false);
+  }
   try {
-    const response = await request({url:`${process.env.URL}/translation/front`}, false);
+    const response = await resourcesPromise;
     return response.data;
   } catch (error) {
+    resourcesPromise = null;
     console.error("Error loading translations:", error);
     return null;
   }

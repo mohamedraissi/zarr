@@ -1,16 +1,17 @@
 "use client";
+import dynamic from "next/dynamic";
 import WrapperComponent from "@/components/common/WrapperComponent";
-import BrandData from "@/components/themes/common/brandData/index";
+const BrandData = dynamic(() => import("@/components/themes/common/brandData/index"), { ssr: false });
 import ParisBanner from "@/components/themes/common/homeBanner/ParisBanner";
-import NewsLetter from "@/components/themes/common/newsletter";
-import SliderBanner from "@/components/themes/common/sliderBanner/index";
+const NewsLetter = dynamic(() => import("@/components/themes/common/newsletter"), { ssr: false });
+const SliderBanner = dynamic(() => import("@/components/themes/common/sliderBanner/index"), { ssr: false });
 import BlogIdsContext from "@/helper/blogIdsContext";
 import BrandIdsContext from "@/helper/brandIdsContext";
 import ProductIdsContext from "@/helper/productIdsContext";
 import SellerContext from "@/helper/sellerContext";
 import ThemeOptionContext from "@/helper/themeOptionsContext";
 import Loader from "@/layout/loader";
-import StickyCart from "@/layout/stickyCart";
+const StickyCart = dynamic(() => import("@/layout/stickyCart"), { ssr: false });
 import request from "@/utils/axiosUtils";
 import { HomePageAPI } from "@/utils/axiosUtils/API";
 import { useQuery } from "@tanstack/react-query";
@@ -28,9 +29,9 @@ const ParisTheme = () => {
   const { themeOption } = useContext(ThemeOptionContext);
 
   const { data, isLoading, refetch } = useQuery({queryKey: ["paris"], queryFn: () => request({ url: HomePageAPI, params: { slug: "paris" } }, router), enabled: true, refetchOnWindowFocus: false, select: (res) => res?.data });
-  useEffect(() => {
-    refetch();
-  }, [isLoading]);
+  
+  // Removed redundant refetch useEffect that was causing multiple API calls on mount.
+  // useQuery with enabled: true already handles the initial fetch.
 
   useEffect(() => {
     if (data?.content?.products_ids?.length > 0) {

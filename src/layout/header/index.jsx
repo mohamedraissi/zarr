@@ -1,12 +1,14 @@
 "use client";
+import dynamic from "next/dynamic";
 import ThemeOptionContext from "@/helper/themeOptionsContext";
 import {  usePathname, useSearchParams } from "next/navigation";
 import { useContext, useMemo } from "react";
 import { headerOptionsMap } from "../../data/LayoutData";
-import StandardHeader from "./StandardHeader";
-import MinimalHeader from "./MinimalHeader";
-import BasicHeader from "./BasicHeader";
-import ClassicHeader from "./ClassicHeader";
+
+const StandardHeader = dynamic(() => import('./StandardHeader'));
+const MinimalHeader = dynamic(() => import('./MinimalHeader'));
+const BasicHeader = dynamic(() => import('./BasicHeader'));
+const ClassicHeader = dynamic(() => import('./ClassicHeader'));
 
 const MainHeader = () => {
   const path = useSearchParams()

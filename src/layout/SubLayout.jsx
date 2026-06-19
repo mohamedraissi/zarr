@@ -1,19 +1,21 @@
+import dynamic from 'next/dynamic';
 import ThemeOptionContext from '@/helper/themeOptionsContext';
 import TabFocusChecker from '@/utils/customFunctions/TabFocus';
 import Cookies from 'js-cookie';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import { queryColors } from '../data/LayoutData';
-import CookiesComponent from './cookies';
-import ExitModal from './exitModal';
-import MainFooter from './footer';
 import MainHeader from './header';
 import MobileMenu from './mobileMenu';
-import NewsLetterModal from './newsLetter/NewsLetterModal';
-import RecentPurchase from './recentPurchase';
-import StickyCompare from './StickyCompare';
-import TapTop from './tapTop';
 import SettingContext from '@/helper/settingContext';
+
+const MainFooter = dynamic(() => import('./footer'), { ssr: false });
+const TapTop = dynamic(() => import('./tapTop'), { ssr: false });
+const CookiesComponent = dynamic(() => import('./cookies'), { ssr: false });
+const StickyCompare = dynamic(() => import('./StickyCompare'), { ssr: false });
+const RecentPurchase = dynamic(() => import('./recentPurchase'), { ssr: false });
+const NewsLetterModal = dynamic(() => import('./newsLetter/NewsLetterModal'), { ssr: false });
+const ExitModal = dynamic(() => import('./exitModal'), { ssr: false });
  
 const SubLayout = ({ children }) => {
   const isTabActive = TabFocusChecker();
