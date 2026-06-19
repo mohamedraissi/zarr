@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
 
 const Img = (props) => {
@@ -5,7 +6,7 @@ const Img = (props) => {
 
     useEffect(() => {
         const image = bgImg.current;
-        if (image.classList.contains('bg-img')) {
+        if (image?.classList?.contains('bg-img')) {
             const parentElement = image.parentElement;
             const src = image.getAttribute('src');
             parentElement.classList.add('bg-size');
@@ -23,6 +24,6 @@ const Img = (props) => {
         }
     }, []);
 
-    return <img ref={bgImg} {...props} />;
+    return <Image ref={bgImg} {...props} fill={!props.width && !props.height} />;
 };
 export default Img;

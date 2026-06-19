@@ -1,4 +1,5 @@
 "use client";
+import Image from 'next/image';
 import { useState } from 'react';
 import { Modal, ModalBody } from 'reactstrap';
 import { RiCloseLine, RiPlayCircleLine } from 'react-icons/ri';
@@ -28,12 +29,13 @@ const VideoModal = ({ videoSrc, thumbnailSrc, height, width }) => {
                 style={{ cursor: 'pointer', position: 'relative' }}
             >
                 <div className="banner-contain hover-effect b-left">
-                    <img
+                    <Image
                         src={LiveImagePath + thumbnailSrc || '/assets/images/fashion/banner/3.jpg'}
                         alt="Video Thumbnail"
                         height={height || 343}
                         width={width || 1524}
                         className="bg-img blur-up lazyload"
+                        quality={80}
                         style={{ width: '100%', height: 'auto', display: 'block' }}
                     />
                     <div className="video-play-overlay">

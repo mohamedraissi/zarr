@@ -315,7 +315,7 @@ const CategoryBox = ({
                       href={`/collections?category=${elem?.slug}`}
                       className={`category-box`}
                     >
-                      <img
+                      <Image
                         src={
                           elem?.category_image
                             ? elem?.category_image?.original_url

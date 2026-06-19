@@ -51,8 +51,8 @@ const AuthorMainPage = ({ slug }) => {
                 <div className="author-main-box">
                     <div className="cover-image">
                         {author?.author_cover_image?.original_url ? 
-                            <img src={author?.author_cover_image?.original_url} height={1493} width={310} alt='author__cover_image' /> :
-                            <img src={'/assets/images/author_placeholder.png'} alt='author__cover_image' className="img-fluid" /> 
+                            <Image src={author?.author_cover_image?.original_url} height={1493} width={310} alt='author__cover_image' /> :
+                            <Image src={'/assets/images/author_placeholder.png'} alt='author__cover_image' className="img-fluid" height={1493} width={310} /> 
                         }
                     </div>
                     <div className="author-box">

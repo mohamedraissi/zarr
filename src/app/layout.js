@@ -1,10 +1,25 @@
 import "../../public/assets/scss/app.scss";
-import NoSSR from "@/utils/NoSSR";
 import { dir } from "i18next";
 import { I18nProvider } from "./i18n/i18n-context";
 import { detectLanguage } from "./i18n/server";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import LanguageProvider from "@/helper/languageContext/LanguageProvider";
+import { Public_Sans, Poppins } from 'next/font/google';
+import Script from "next/script";
+
+const publicSans = Public_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--public-sans',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+});
+
+const poppins = Poppins({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--poppins',
+});
 
 export async function generateMetadata() {
   // fetch data
@@ -17,10 +32,6 @@ export async function generateMetadata() {
     description: themeOption?.options?.seo?.meta_description,
     icons: {
       icon: themeOption?.options?.logo?.favicon_icon?.original_url,
-      link: {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Public+Sans&display=swap",
-      },
     },
     openGraph: {
       title: themeOption?.options?.seo?.og_title,
@@ -38,18 +49,19 @@ export default async function CustomLayout({ children }) {
   return (
     <I18nProvider language={lng}>
       <LanguageProvider initialLanguage={lng}>
-        <html lang={lng} dir={dir(lng)}>
+        <html lang={lng} dir={dir(lng)} className={`${publicSans.variable} ${poppins.variable}`}>
           <head>
-            <link
-              rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Public+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
-            />
             <GoogleAnalytics
               gaId={
                 settings?.values?.analytics?.google_analytics?.measurement_id
               }
             />
-            <script
+          </head>
+          <body suppressHydrationWarning={true}>
+            {children}
+            <Script
+              id="facebook-pixel"
+              strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: `
               !function(f,b,e,v,n,t,s)
@@ -65,9 +77,6 @@ export default async function CustomLayout({ children }) {
               `,
               }}
             />
-          </head>
-          <body suppressHydrationWarning={true}>
-            <NoSSR>{children}</NoSSR>
           </body>
         </html>
       </LanguageProvider>

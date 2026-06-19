@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
@@ -85,13 +86,15 @@ const SearchDropDown = React.forwardRef((props, ref) => {
                 key={index}
               >
                 <div className="suggestion-image">
-                  <img
+                  <Image
                     src={
                       data?.original_url
                         ? data?.original_url
                         : "/assets/images/placeholder.png"
                     }
                     alt="product image"
+                    width={70}
+                    height={70}
                   />
                 </div>
                 <div className="suggestion-category">

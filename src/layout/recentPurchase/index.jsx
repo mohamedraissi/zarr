@@ -53,7 +53,7 @@ const RecentPurchase = () => {
   return (
     <Media className={`d-none recently-purchase ${show ? 'show' : ''}`}>
       <Link href={`/product/${product?.slug}`}>
-        {product?.product_thumbnail?.original_url ? <img src={product?.product_thumbnail?.original_url} className='media-height' alt={product?.name || 'product'} />
+        {product?.product_thumbnail?.original_url ? <Image src={product?.product_thumbnail?.original_url} className='media-height' alt={product?.name || 'product'} height={64} width={85} />
           : placeHolderImage && <Image src={placeHolderImage} className='media-height' alt={product?.name || 'product'} height={64} width={85} />
         }
       </Link>
