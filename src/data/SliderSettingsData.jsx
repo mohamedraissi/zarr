@@ -22,7 +22,7 @@ export const BannerSliderOption4 = {
     {
       breakpoint: 601,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 2,
       },
     },
   ],

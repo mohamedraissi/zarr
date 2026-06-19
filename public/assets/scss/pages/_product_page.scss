@@ -2380,6 +2380,11 @@
   margin-top: 10px;
   max-width: 600px;
 
+  @include max(767.98px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   button {
     width: 100%;
     color: #ffffff;

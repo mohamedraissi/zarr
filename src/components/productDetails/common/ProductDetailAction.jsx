@@ -15,7 +15,6 @@ const ProductDetailAction = ({ productState, setProductState, extraOption, isDis
   const { cartCanvas, setCartCanvas } = useContext(ThemeOptionContext);
   const { handleIncDec, isLoading } = useContext(CartContext);
   const { convertCurrency } = useContext(SettingContext);
-  const [totalPrice, settotalPrice] = useState(0)
   const router = useRouter();
   const addToCart = () => {
     handleIncDec(productState?.productQty, productState?.product, false, false, false, productState);
@@ -67,8 +66,11 @@ const ProductDetailAction = ({ productState, setProductState, extraOption, isDis
     if (wholesale && productState?.product.wholesale_price_type == 'fixed') {
       setProductState(prev => { return { ...prev, totalPrice: prev?.productQty * wholesale.value } })
     } else if (wholesale && productState?.product.wholesale_price_type == 'percentage') {
-      setProductState(prev => { return { ...prev, totalPrice: prev?.productQty * (prev?.selectedVariation ? prev?.selectedVariation.sale_price : prev?.product.sale_price) } })
-      setProductState(prev => { return { ...prev, totalPrice: prev?.totalPrice - (prev?.totalPrice * (wholesale.value / 100)) } })
+      setProductState(prev => {
+        const basePrice = prev?.selectedVariation ? prev?.selectedVariation.sale_price : prev?.product.sale_price;
+        const total = prev?.productQty * basePrice;
+        return { ...prev, totalPrice: total - (total * (wholesale.value / 100)) }
+      })
     } else {
       setProductState(prev => { return { ...prev, totalPrice: prev?.productQty * (prev?.selectedVariation ? prev?.selectedVariation.sale_price : prev?.product.sale_price) } })
     }
@@ -76,17 +78,13 @@ const ProductDetailAction = ({ productState, setProductState, extraOption, isDis
 
   useEffect(() => {
     wholesalePriceCal();
-  }, [totalPrice])
+  }, [productState?.productQty, productState?.selectedVariation, productState?.product])
+
   return (
     <>
-
       {productState?.product?.wholesales?.length ? (
-        <>
-          <ProductWholesale productState={productState} />
-          <h4>{'Total Price:'} <span className="theme-color">{convertCurrency(productState?.totalPrice)}</span></h4>
-        </>
-      ) : null
-      }
+        <ProductWholesale productState={productState} />
+      ) : null}
 
       {!productState?.product.external_url && isDisplay &&
         <div className='note-box product-package'>
@@ -101,6 +99,9 @@ const ProductDetailAction = ({ productState, setProductState, extraOption, isDis
               </Btn>
             </InputGroup>
           </div>}
+
+
+
           {extraOption !== false ? (
             <div className='wishlist-btn-group'>
               <AddToWishlist productObj={productState?.product} customClass={'wishlist-button btn'} />

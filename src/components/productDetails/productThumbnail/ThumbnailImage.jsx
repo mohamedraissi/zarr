@@ -47,6 +47,16 @@ const ThumbnailProductImage = ({ productState }) => {
       slider1.current.slickGoTo(index);
   }, [productState?.selectedVariation.variation_image?.id]);
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const galleryImages =
     productState?.product?.product_galleries?.length > 0
       ? productState.product.product_galleries
@@ -97,6 +107,14 @@ const ThumbnailProductImage = ({ productState }) => {
                           ></source>
                         </audio>
                       </div>
+                    ) : isMobile ? (
+                      <Image
+                        src={image?.original_url}
+                        alt={image?.name || ""}
+                        className="img-fluid"
+                        height={500}
+                        width={500}
+                      />
                     ) : (
                       <ImageZoom
                         src={image?.original_url}

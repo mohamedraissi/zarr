@@ -3,9 +3,13 @@ import { useContext, useMemo } from 'react';
 import Btn from '@/elements/buttons/Btn';
 import { useTranslation } from "react-i18next";
 import ThemeOptionContext from '@/helper/themeOptionsContext';
+import SettingContext from '@/helper/settingContext';
+
 
 const AddToCartButton = ({ productState, addToCart, isLoading, buyNow, extraOption }) => {
   const { cartCanvas, setCartCanvas, themeOption } = useContext(ThemeOptionContext);
+  const { convertCurrency } = useContext(SettingContext);
+
   const { t } = useTranslation('common');
   const externalProductLink = (link) => {
     if (link) {
@@ -46,7 +50,7 @@ const AddToCartButton = ({ productState, addToCart, isLoading, buyNow, extraOpti
               disabled={productState?.product?.status === 0 || productState?.product?.stock_status == 'out_of_stock' || productState?.product?.quantity < productState?.productQty}
               loading={Number(isLoading)}>
               {productState?.product?.stock_status == 'out_of_stock' || productState?.product?.quantity < productState?.productQty ? null : <RiShoppingCartLine className='me-2' />}
-              {productState?.product?.stock_status == 'out_of_stock' || productState?.product?.quantity < productState?.productQty ? t('sold_out') : t('add_to_cart')}
+              {productState?.product?.stock_status == 'out_of_stock' || productState?.product?.quantity < productState?.productQty ? t('sold_out') : `${t('add_to_cart')}  ${convertCurrency(productState?.totalPrice)}`}
             </Btn>
           ) : (
             <Btn
@@ -63,8 +67,8 @@ const AddToCartButton = ({ productState, addToCart, isLoading, buyNow, extraOpti
               {productState?.selectedVariation
                 ? productState?.selectedVariation?.stock_status == 'out_of_stock' || productState?.selectedVariation?.quantity < productState?.productQty
                   ? t('sold_out')
-                  : t('add_to_cart')
-                : t('add_to_cart')}
+                  : `${t('add_to_cart')} ${convertCurrency(productState?.totalPrice)}`
+                : `${t('add_to_cart')} ${convertCurrency(productState?.totalPrice)}`}
             </Btn>
           )}
           {extraOption !== false ? (
