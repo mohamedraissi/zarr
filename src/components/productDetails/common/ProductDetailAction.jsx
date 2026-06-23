@@ -11,6 +11,86 @@ import SettingContext from '@/helper/settingContext';
 import ProductWholesale from './ProductWholesale';
 import ThemeOptionContext from '@/helper/themeOptionsContext';
 
+const ProductWeightInputs = ({ productState, setProductState, checkStockAvailable }) => {
+  const totalGrams = useMemo(() => Math.round(productState?.productQty * 100), [productState?.productQty]);
+  const kg = useMemo(() => Math.floor(totalGrams / 1000), [totalGrams]);
+  const gram = useMemo(() => totalGrams % 1000, [totalGrams]);
+
+  const handleWeightChange = (newKg, newGram) => {
+    let k = parseInt(newKg);
+    let g = parseInt(newGram);
+
+    // Handle gram overflow/underflow
+    if (g >= 1000) {
+      k += Math.floor(g / 1000);
+      g = g % 1000;
+    } else if (g < 0) {
+      const subtractKg = Math.ceil(Math.abs(g) / 1000);
+      k -= subtractKg;
+      g = 1000 - (Math.abs(g) % 1000);
+      if (g === 1000) g = 0;
+    }
+
+    if (k < 0) {
+      k = 0;
+      g = Math.max(0, g);
+    }
+
+    const totalGrams = k * 1000 + g;
+    const newQty = totalGrams / 100;
+    setProductState((prev) => ({ ...prev, productQty: newQty }));
+    checkStockAvailable();
+  };
+
+  return (
+    <div className="d-flex align-items-center gap-2 weight-input-wrapper " style={{ flexWrap: 'wrap' }}>
+      <div className='d-flex align-items-center gap-1'>
+        <div className='qty-box product-qty' style={{ maxWidth: '120px', marginTop: 0 }}>
+          <InputGroup>
+            <Btn type='button' className='qty-right-plus' onClick={() => handleWeightChange(kg - 1, gram)}>
+              <RiSubtractLine />
+            </Btn>
+            <Input
+              className='input-number qty-input'
+              type='number'
+              value={kg}
+              min={0}
+              onChange={(e) => handleWeightChange(e.target.value, gram)}
+            />
+            <Btn type='button' className='qty-left-minus' onClick={() => handleWeightChange(kg + 1, gram)}>
+              <RiAddLine />
+            </Btn>
+          </InputGroup>
+        </div>
+        <span style={{ fontSize: '14px', fontWeight: 'bold' }}>Kg</span>
+      </div>
+
+      <div className='d-flex align-items-center gap-1'>
+        <div className='qty-box product-qty' style={{ maxWidth: '120px', marginTop: 0 }}>
+          <InputGroup>
+            <Btn type='button' className='qty-right-plus' onClick={() => handleWeightChange(kg, gram - 100)}>
+              <RiSubtractLine />
+            </Btn>
+            <Input
+              className='input-number qty-input'
+              type='number'
+              value={gram}
+              min={0}
+              max={999}
+              step={100}
+              onChange={(e) => handleWeightChange(kg, e.target.value)}
+            />
+            <Btn type='button' className='qty-left-minus' onClick={() => handleWeightChange(kg, gram + 100)}>
+              <RiAddLine />
+            </Btn>
+          </InputGroup>
+        </div>
+        <span style={{ fontSize: '14px', fontWeight: 'bold' }}>G</span>
+      </div>
+    </div>
+  );
+};
+
 const ProductDetailAction = ({ productState, setProductState, extraOption, isDisplay = true }) => {
   const { cartCanvas, setCartCanvas } = useContext(ThemeOptionContext);
   const { handleIncDec, isLoading } = useContext(CartContext);
@@ -88,22 +168,28 @@ const ProductDetailAction = ({ productState, setProductState, extraOption, isDis
 
       {!productState?.product.external_url && isDisplay &&
         <div className='note-box product-package'>
-          {showAddToCart && <div className='cart_qty qty-box product-qty'>
-            <InputGroup>
-              <Btn type='button' className='qty-right-plus' onClick={() => updateQty(-1)}>
-                <RiSubtractLine />
-              </Btn>
-              <Input className='input-number qty-input' type='number' value={productState?.productQty} readOnly />
-              <Btn type='button' className='qty-left-minus' onClick={() => updateQty(1)}>
-                <RiAddLine />
-              </Btn>
-            </InputGroup>
-          </div>}
+          {showAddToCart && (
+            productState?.product?.by_gram ? (
+              <ProductWeightInputs productState={productState} setProductState={setProductState} checkStockAvailable={checkStockAvailable} />
+            ) : (
+              <div className='cart_qty qty-box product-qty'>
+                <InputGroup>
+                  <Btn type='button' className='qty-right-plus' onClick={() => updateQty(-1)}>
+                    <RiSubtractLine />
+                  </Btn>
+                  <Input className='input-number qty-input' type='number' value={productState?.productQty} readOnly />
+                  <Btn type='button' className='qty-left-minus' onClick={() => updateQty(1)}>
+                    <RiAddLine />
+                  </Btn>
+                </InputGroup>
+              </div>
+            )
+          )}
 
 
 
           {extraOption !== false ? (
-            <div className='wishlist-btn-group'>
+            <div className='wishlist-btn-group d-flex align-items-center gap-2'>
               <AddToWishlist productObj={productState?.product} customClass={'wishlist-button btn'} />
               <AddToCompare productObj={productState?.product} customClass={'wishlist-button btn'} />
             </div>

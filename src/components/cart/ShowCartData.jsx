@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import CartSidebar from './CartSidebar';
-import { Col, Table } from 'reactstrap';
+import { Col } from 'reactstrap';
 import CartData from './CartData';
 import CartContext from '@/helper/cartContext';
 import { useTranslation } from "react-i18next";
@@ -9,22 +9,16 @@ import emptyImage from '../../../public/assets/svg/empty-items.svg';
 
 const ShowCartData = () => {
   const { cartProducts } = useContext(CartContext);
-  const { t } = useTranslation( 'common');
+  const { t } = useTranslation('common');
   return (
     <>
       {cartProducts?.length > 0 ? (
         <>
           <Col xxl={9} xl={8}>
-            <div className='cart-table'>
-              <div className='table-responsive'>
-                <Table className='table'>
-                  <tbody>
-                    {cartProducts.map((elem, i) => (
-                      <CartData elem={elem} key={i} />
-                    ))}
-                  </tbody>
-                </Table>
-              </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {cartProducts.map((elem, i) => (
+                <CartData elem={elem} key={i} />
+              ))}
             </div>
           </Col>
           <CartSidebar />
