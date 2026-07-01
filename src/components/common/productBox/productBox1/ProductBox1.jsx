@@ -51,10 +51,10 @@ const ProductBox1 = ({ imgUrl, badge, productDetail, isClose, refetch, addAction
         </Link>
         {productDetail?.unit && <h6 className='unit mb-1'>{productDetail?.unit}</h6>}
         <h5 className='sold text-content'>
-          <span className='theme-color price'>{convertCurrency(productDetail?.by_gram ? productDetail?.sale_price * 10 : productDetail?.sale_price)}{productDetail?.by_gram ? " par Kg" : ""}</span>
+          <span className='theme-color price'>{convertCurrency(productDetail?.sale_price)}</span>
           {
             productDetail?.discount || productDetail?.discount ? (
-              <del className='ms-1'>{convertCurrency(productDetail?.by_gram ? productDetail?.price * 10 : productDetail?.price)}</del>
+              <del className='ms-1'>{convertCurrency(productDetail?.price)}</del>
             ) : null
           }
         </h5>

@@ -53,8 +53,8 @@ const ClassicProductBox = ({ product, isClose, addAction = true, isProductAction
 
                 <div className="product-bottom">
                     <h5 className='sold text-content'>
-                        <span className='theme-color price'>{convertCurrency(product?.by_gram ? product?.sale_price * 10 : product?.sale_price)}{product?.by_gram ? " par Kg" : ""}</span>
-                        {product?.discount && <del className='ms-1'>{convertCurrency(product?.by_gram ? product?.price * 10 : product?.price)}</del>}
+                        <span className='theme-color price'>{product?.by_gram == 1 ? `${convertCurrency(product?.sale_price * 10)} par Kg` : convertCurrency(product?.sale_price)}</span>
+                        {product?.discount && <del className='ms-1'>{product?.by_gram == 1 ? `${convertCurrency(product?.price * 10)} par Kg` : convertCurrency(product?.price)}</del>}
                     </h5>
 
                     <div className='add-to-cart-box'>

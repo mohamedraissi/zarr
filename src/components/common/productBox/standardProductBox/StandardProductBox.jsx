@@ -38,7 +38,7 @@ const StandardProductBox = ({ product, isClose, isProductAction=true }) => {
                 {product?.unit && <h6 className='sold weight mb-0 text-content fw-normal'>{product?.unit}</h6>}
 
                 <div className="bottom-content">
-                    <h6 className="price theme-color m-0">{convertCurrency(product?.sale_price)}</h6>
+                    <h6 className="price theme-color m-0">{product?.by_gram == 1 ? `${convertCurrency(product?.sale_price * 10)} par Kg` : convertCurrency(product?.sale_price)}</h6>
                     <div className="add-to-cart-btn-2 addtocart_btn">
                         <ProductCartButton productObj={product} iconClass={true} />
                     </div>

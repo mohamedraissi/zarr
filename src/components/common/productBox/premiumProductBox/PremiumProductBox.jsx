@@ -50,8 +50,8 @@ const PremiumProductBox = ({ product, isClose, refetch, classObj = {}, isProduct
                 </Link>
                 <p dangerouslySetInnerHTML={{ __html: product?.short_description }} />
                 <h5 className='sold text-content'>
-                    <span className='theme-color price'>{convertCurrency(product?.sale_price)}</span>
-                    {product?.discount && <del className='ms-1'>{convertCurrency(product?.price)}</del>}
+                    <span className='theme-color price'>{product?.by_gram == 1 ? `${convertCurrency(product?.sale_price * 10)} par Kg` : convertCurrency(product?.sale_price)}</span>
+                    {product?.discount && <del className='ms-1'>{product?.by_gram == 1 ? `${convertCurrency(product?.price * 10)} par Kg` : convertCurrency(product?.price)}</del>}
                 </h5>
                 <div className='product-rating mt-sm-2 mt-1'>
                     <ProductRating totalRating={product?.rating_count || 0} />

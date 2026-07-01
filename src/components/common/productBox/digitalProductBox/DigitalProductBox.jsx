@@ -88,7 +88,7 @@ const DigitalProductBox = ({ product, isClose }) => {
         <div className="bottom-content">
           <div>
             <span>{product?.orders_count} {t('sales')}</span>
-            <h5 className="price">{convertCurrency(product?.sale_price)}</h5>
+            <h5 className="price">{product?.by_gram == 1 ? `${convertCurrency(product?.sale_price * 10)} par Kg` : convertCurrency(product?.sale_price)}</h5>
           </div>
 
           <div className="btn-grp">

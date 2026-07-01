@@ -50,11 +50,19 @@ const ProductContent = ({ productState, setProductState }) => {
             {showAddToCart && (
                 <div className="price-rating">
                     <h3 className="theme-color price">
-                        {productState?.selectedVariation?.sale_price ? convertCurrency(productState?.selectedVariation?.sale_price) : convertCurrency(productState?.product?.sale_price)}
+                        {productState?.selectedVariation?.sale_price ? (
+                            productState?.product?.by_gram == 1 ? `${convertCurrency(productState?.selectedVariation?.sale_price * 10)} par Kg` : convertCurrency(productState?.selectedVariation?.sale_price)
+                        ) : (
+                            productState?.product?.by_gram == 1 ? `${convertCurrency(productState?.product?.sale_price * 10)} par Kg` : convertCurrency(productState?.product?.sale_price)
+                        )}
 
                         {productState?.selectedVariation?.discount || productState?.product?.discount ? (
                             <del className="text-content">
-                                {productState?.selectedVariation ? convertCurrency(productState?.selectedVariation?.price) : convertCurrency(productState?.product?.price)}
+                                {productState?.selectedVariation ? (
+                                    productState?.product?.by_gram == 1 ? `${convertCurrency(productState?.selectedVariation?.price * 10)} par Kg` : convertCurrency(productState?.selectedVariation?.price)
+                                ) : (
+                                    productState?.product?.by_gram == 1 ? `${convertCurrency(productState?.product?.price * 10)} par Kg` : convertCurrency(productState?.product?.price)
+                                )}
                             </del>
                         ) : null}
 

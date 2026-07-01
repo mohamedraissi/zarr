@@ -37,7 +37,7 @@ const CompareData = () => {
                 </Link>
               </div>
               <CompareWrapper data={{ title: 'Discount', value: product?.discount ? product?.discount : '-' }} />
-              <CompareWrapper data={{ title: 'Price', value: convertCurrency(product?.sale_price) }} />
+              <CompareWrapper data={{ title: 'Price', value: product?.by_gram == 1 ? `${convertCurrency(product?.sale_price * 10)} par Kg` : convertCurrency(product?.sale_price) }} />
               <CompareWrapper data={{ title: 'Availability', value: ModifyString(product?.stock_status) }} />
               <CompareWrapper data={{ title: 'Rating' }}>
                 <div className='compare-rating'>
