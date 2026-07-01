@@ -53,8 +53,8 @@ const BasicProductBox = ({ product, isClose, classObj = {}, isProductAction = tr
                 {showAddToCart && (
                     <>
                         <h5 className='sold text-content'>
-                            <span className='theme-color price'>{convertCurrency(product?.sale_price)}</span>
-                            {product?.discount && <del className='ms-1'>{convertCurrency(product?.price)}</del>}
+                            <span className='theme-color price'>{convertCurrency(product?.by_gram ? product?.sale_price * 10 : product?.sale_price)}{product?.by_gram ? " par Kg" : ""}</span>
+                            {product?.discount && <del className='ms-1'>{convertCurrency(product?.by_gram ? product?.price * 10 : product?.price)}</del>}
                         </h5>
 
                         <div className='product-rating mt-sm-2 mt-1'>

@@ -15,6 +15,7 @@ const ProductContent = ({ productState, setProductState }) => {
         if (!productState?.product?.categories?.length) return true;
         return !productState?.product?.categories?.some(category => category?.is_add_to_cart_visible === false || category?.is_add_to_cart_visible === 0);
     }, [productState?.product]);
+    console.log("productState", productState);
     return (
         <>
             <h2 className='name'>{productState?.selectedVariation?.name ?? productState?.product?.name}</h2>
