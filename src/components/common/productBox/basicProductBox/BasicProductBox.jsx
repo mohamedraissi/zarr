@@ -46,7 +46,7 @@ const BasicProductBox = ({ product, isClose, classObj = {}, isProductAction = tr
                     <h6 className='name'>{product?.name}</h6>
                 </Link>
                 <p dangerouslySetInnerHTML={{ __html: product?.short_description }} />
-                {product?.unit && <h6 className='unit mb-1'>1Kg</h6>}
+                {product?.by_gram == 1 ? <h6 className='unit mb-1'>1Kg</h6> : null}
                 {product?.store &&
                     <h6 className="byers">{('By')}<span className="text-title">{product?.store?.store_name}</span></h6>
                 }

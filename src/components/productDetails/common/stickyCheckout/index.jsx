@@ -1,15 +1,7 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import ShowProduct from './ShowProduct';
 
-const StickyCheckout = ({ ProductData }) => {
-  const [productState, setProductState] = useState({ product: ProductData, attributeValues: [], productQty: 1, selectedVariation: '', variantIds: [] });
-
-  useEffect(() => {
-    if (ProductData) {
-      setProductState({ ...productState, product: ProductData });
-    }
-  }, [ProductData]);
-
+const StickyCheckout = ({ productState, setProductState }) => {
   return <ShowProduct productState={productState} setProductState={setProductState} />;
 };
 

@@ -45,9 +45,9 @@ const ProductAttribute = ({ productState, setProductState, stickyAddToCart }) =>
     } else {
 
       // Set First Variant Default
-      for (const attribute of productObj?.attributes) {
+      for (const attribute of productObj?.attributes || []) {
         if (productState.attributeValues?.length && attribute?.attribute_values?.length) {
-          for (const value of attribute?.attribute_values) {
+          for (const value of attribute?.attribute_values || []) {
             if (productState?.attributeValues?.includes(value?.id)) {
               setVariant(productObj?.variations, value);
               if (breakLoop) {
@@ -62,9 +62,9 @@ const ProductAttribute = ({ productState, setProductState, stickyAddToCart }) =>
     // Set Variation Image
     productObj?.variations?.forEach((variation) => {
       let attrValues = variation?.attribute_values?.map((attribute_value) => attribute_value?.id);
-      productObj?.attributes.filter((attribute) => {
+      productObj?.attributes?.filter((attribute) => {
         if (attribute.style == 'image') {
-          attribute.attribute_values.filter((attribute_value) => {
+          attribute?.attribute_values?.filter((attribute_value) => {
             if (productState?.attributeValues?.includes(attribute_value.id)) {
               if (attrValues.includes(attribute_value.id)) {
                 attribute_value.variation_image = variation.variation_image;
@@ -136,7 +136,7 @@ const ProductAttribute = ({ productState, setProductState, stickyAddToCart }) =>
       }
 
       if (variation?.stock_status == 'out_of_stock') {
-        variation?.attribute_values.filter((attr_value) => {
+        variation?.attribute_values?.filter((attr_value) => {
           if (attrValues.some((value) => tempVariantIds.includes(value))) {
             if (attrValues.every((value) => tempVariantIds.includes(value))) {
               tempSoldOutAttributesIds.push(attr_value.id);

@@ -87,7 +87,7 @@ const ProductDetailContent = ({ params }) => {
       {queryProductLayout == 'product_digital' ? <DigitalBreadcrumb product={productState.product} /> :<Breadcrumb title={params} subNavigation={[{ name: 'product' }, { name: params }]} />}
       {showProductLayout[isProductLayout]}
       {productState?.product?.related_products?.length > 0 && <RelatedProduct productState={productState} />}
-      {ProductData && <StickyCheckout ProductData={ProductData} isLoading={isLoading} />}
+      {ProductData && <StickyCheckout productState={productState} setProductState={setProductState} />}
     </>
   );
 };

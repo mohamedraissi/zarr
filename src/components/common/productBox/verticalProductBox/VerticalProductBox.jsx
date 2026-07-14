@@ -19,7 +19,7 @@ const VerticalProductBox = ({ product }) => {
                     <Link href={`/product/${product?.slug}`} className='text-title'>
                         <h6 className='name'>{product?.name}</h6>
                     </Link>
-                    <span>1Kg</span>
+                    {product?.by_gram == 1 ? <span>1Kg</span> : null}
                     <div className='vertical-price'>
                         <h6 className='price theme-color'>{product?.by_gram == 1 ? `${convertCurrency(product?.sale_price * 10)}` : convertCurrency(product?.sale_price)}</h6>
                         {

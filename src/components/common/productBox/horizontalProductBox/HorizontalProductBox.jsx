@@ -42,7 +42,7 @@ const BasicProductBox = ({ product, isClose, classObj, isProductAction = true })
                         <h6 className='name'>{product.name}</h6>
                     </Link>
                     <p dangerouslySetInnerHTML={{ __html: product?.short_description }} />
-                    {product?.unit && <h6 className='unit mb-1'>1Kg</h6>}
+                    {product?.by_gram == 1 ? <h6 className='unit mb-1'>1Kg</h6> : null}
                     <h6 className="byers">By {product.store?.store_name}</h6>
                     <h5 className='sold text-content'>
                         <span className='theme-color price'>{product?.by_gram == 1 ? `${convertCurrency(product?.sale_price * 10)}` : convertCurrency(product?.sale_price)}</span>

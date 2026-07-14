@@ -93,7 +93,7 @@ const ProductContent = ({ productState, setProductState }) => {
             {productState?.product.status &&
                 <>
                     {productState?.product?.type == 'classified' && <ProductAttribute productState={productState} setProductState={setProductState} />}
-                    {productState?.product?.sale_starts_at && productState?.product?.sale_expired_at && <OfferTimer productState={productState} />}
+                    {productState?.product?.sale_starts_at && productState?.product?.sale_expired_at && null /*<OfferTimer productState={productState} />*/}
                     <ProductDetailAction productState={productState} setProductState={setProductState} />
                 </>
             }
